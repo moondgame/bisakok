@@ -252,13 +252,29 @@
     padding: 1.5rem 1rem;
     text-align: center;
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    cursor: default;
+    cursor: pointer;
   }
 
   .svc-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(255,107,26,0.12);
-    border-color: rgba(255,107,26,0.35);
+    box-shadow: 0 8px 24px rgba(255,107,26,0.15);
+    border-color: rgba(255,107,26,0.5);
+  }
+
+  .svc-card:hover .svc-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .svc-cta {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--orange);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s, transform 0.2s;
   }
 
   .svc-icon { font-size: 32px; margin-bottom: 10px; display: block; }
@@ -553,48 +569,191 @@
   <h2 class="sec-title">Kamu Minta, BisaKok Kerjain</h2>
   <p class="sec-sub">Dari yang simpel sampai yang butuh kreativitas ekstra — semua bisa, selama masuk akal dan ada deal-nya.</p>
   <div class="svc-grid">
-    <div class="svc-card">
-      <span class="svc-icon">💑</span>
+    <div class="svc-card" onclick="openModal('Pacar Sewaan','❤️')">
+      <span class="svc-icon">❤️</span>
       <div class="svc-name">Pacar Sewaan</div>
       <div class="svc-desc">Kencan, acara keluarga, atau nemenin di medsos</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Teman Jalan','🚶')">
       <span class="svc-icon">🚶</span>
       <div class="svc-name">Teman Jalan</div>
       <div class="svc-desc">Mall, wisata, atau ke mana pun kamu mau</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Teman Makan','🍜')">
       <span class="svc-icon">🍜</span>
       <div class="svc-name">Teman Makan</div>
       <div class="svc-desc">Biar nggak makan sendirian lagi</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Teman Ngobrol','💬')">
       <span class="svc-icon">💬</span>
       <div class="svc-name">Teman Ngobrol</div>
       <div class="svc-desc">Curhat, diskusi, atau sekadar teman bicara</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Jemput & Antar','🚗')">
       <span class="svc-icon">🚗</span>
       <div class="svc-name">Jemput & Antar</div>
       <div class="svc-desc">Ke mana pun sesuai permintaan</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
-      <span class="svc-icon">🧹</span>
-      <div class="svc-name">Cuci Kendaraan</div>
-      <div class="svc-desc">Motor atau mobil dicuci bersih sampai kinclong</div>
+    <div class="svc-card" onclick="openModal('Teman Main / Nongkrong','🎮')">
+      <span class="svc-icon">🎮</span>
+      <div class="svc-name">Teman Main / Nongkrong</div>
+      <div class="svc-desc">Gaming, café, atau nongkrong bareng biar nggak bosen</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Titip & Antar Barang','📦')">
       <span class="svc-icon">📦</span>
       <div class="svc-name">Titip & Antar Barang</div>
       <div class="svc-desc">Belanja, kirim paket, atau ambil sesuatu</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" onclick="openModal('Request Lainnya','✨')">
       <span class="svc-icon">✨</span>
       <div class="svc-name">Request Lainnya</div>
       <div class="svc-desc">Ada kebutuhan lain? Ngobrol dulu, pasti bisa diatur!</div>
+      <div class="svc-cta">Pesan →</div>
     </div>
   </div>
 </section>
+
+<!-- POPUP MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999; align-items:center; justify-content:center; padding:1rem;">
+  <div id="modal-box" onclick="event.stopPropagation()" style="background:#fff; border-radius:24px; padding:2rem 1.5rem; width:100%; max-width:420px; max-height:90vh; overflow-y:auto; position:relative;">
+
+    <!-- Close -->
+    <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:var(--gray); border:none; border-radius:50%; width:32px; height:32px; font-size:16px; cursor:pointer; color:var(--text-muted); display:flex; align-items:center; justify-content:center;">✕</button>
+
+    <!-- Header -->
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <div id="modal-icon" style="font-size:2.5rem; margin-bottom:8px;">💑</div>
+      <h3 id="modal-title" style="font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--dark);">Pacar Sewaan</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Isi detail pesanan kamu di bawah ini</p>
+    </div>
+
+    <!-- Form -->
+    <div style="display:flex; flex-direction:column; gap:14px;">
+
+      <!-- Nama -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Nama Kamu</label>
+        <input id="f-nama" type="text" placeholder="Contoh: Budi" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
+      </div>
+
+      <!-- Hari -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Hari & Tanggal</label>
+        <input id="f-hari" type="date" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
+      </div>
+
+      <!-- Jam mulai -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Jam Mulai</label>
+        <input id="f-jam" type="time" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
+      </div>
+
+      <!-- Durasi -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Durasi</label>
+        <select id="f-durasi" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none; background:#fff; cursor:pointer;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'">
+          <option value="">-- Pilih durasi --</option>
+          <option>1 jam</option>
+          <option>2 jam</option>
+          <option>3 jam</option>
+          <option>4 jam</option>
+          <option>5 jam</option>
+          <option>6 jam</option>
+          <option>Setengah hari (±5 jam)</option>
+          <option>Full day (±10 jam)</option>
+        </select>
+      </div>
+
+      <!-- Lokasi -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Lokasi / Alamat Jemput</label>
+        <input id="f-lokasi" type="text" placeholder="Contoh: Mataram, Lombok" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
+      </div>
+
+      <!-- Catatan -->
+      <div>
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Catatan Tambahan <span style="font-weight:400;">(opsional)</span></label>
+        <textarea id="f-catatan" rows="3" placeholder="Ceritain lebih detail kebutuhanmu..." style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none; resize:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      </div>
+
+      <!-- Tombol WA -->
+      <button onclick="kirimWA()" style="width:100%; background:var(--orange); color:#fff; font-weight:800; font-size:15px; padding:14px; border-radius:99px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s; margin-top:4px;">
+        <span style="background:#25D366; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;">✓</span>
+        Lanjut ke WhatsApp
+      </button>
+
+      <p style="text-align:center; font-size:11px; color:var(--text-muted);">Pesan akan terkirim otomatis ke WhatsApp BisaKok</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var modalLayanan = '';
+
+  function openModal(nama, icon) {
+    modalLayanan = nama;
+    document.getElementById('modal-title').textContent = nama;
+    document.getElementById('modal-icon').textContent = icon;
+    document.getElementById('f-nama').value = '';
+    document.getElementById('f-hari').value = '';
+    document.getElementById('f-jam').value = '';
+    document.getElementById('f-durasi').value = '';
+    document.getElementById('f-lokasi').value = '';
+    document.getElementById('f-catatan').value = '';
+    var overlay = document.getElementById('modal-overlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function kirimWA() {
+    var nama    = document.getElementById('f-nama').value.trim() || 'Tidak disebutkan';
+    var hari    = document.getElementById('f-hari').value;
+    var jam     = document.getElementById('f-jam').value;
+    var durasi  = document.getElementById('f-durasi').value;
+    var lokasi  = document.getElementById('f-lokasi').value.trim() || 'Tidak disebutkan';
+    var catatan = document.getElementById('f-catatan').value.trim() || '-';
+
+    if (!hari || !jam || !durasi) {
+      alert('Mohon isi hari, jam mulai, dan durasi terlebih dahulu ya!');
+      return;
+    }
+
+    var tglObj = new Date(hari);
+    var hariNama = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][tglObj.getDay()];
+    var tglFormatted = hariNama + ', ' + tglObj.getDate() + '/' + (tglObj.getMonth()+1) + '/' + tglObj.getFullYear();
+
+    var pesan =
+      'Halo BisaKok! Saya mau pesan layanan:\n\n' +
+      '🏷️ *Layanan:* ' + modalLayanan + '\n' +
+      '👤 *Nama:* ' + nama + '\n' +
+      '📅 *Hari & Tanggal:* ' + tglFormatted + '\n' +
+      '🕐 *Jam Mulai:* ' + jam + '\n' +
+      '⏱️ *Durasi:* ' + durasi + '\n' +
+      '📍 *Lokasi:* ' + lokasi + '\n' +
+      '📝 *Catatan:* ' + catatan + '\n\n' +
+      'Mohon konfirmasinya, terima kasih!';
+
+    var url = 'https://wa.me/6285143863741?text=' + encodeURIComponent(pesan);
+    window.open(url, '_blank');
+    closeModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
 
 <!-- CARA KERJA -->
 <section class="how" id="cara-kerja">
