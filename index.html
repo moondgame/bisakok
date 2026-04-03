@@ -697,9 +697,9 @@
 <script>
   var modalLayanan = '';
 
-  function openModal(nama, icon) {
-    modalLayanan = nama;
-    document.getElementById('modal-title').textContent = nama;
+  function openModal(namaLayanan, icon) {
+    modalLayanan = namaLayanan;
+    document.getElementById('modal-title').textContent = namaLayanan;
     document.getElementById('modal-icon').textContent = icon;
     document.getElementById('f-nama').value = '';
     document.getElementById('f-hari').value = '';
@@ -718,13 +718,14 @@
   }
 
   function kirimWA() {
-    var nama    = document.getElementById('f-nama').value.trim() || 'Tidak disebutkan';
+    var nama    = document.getElementById('f-nama').value.trim();
     var hari    = document.getElementById('f-hari').value;
     var jam     = document.getElementById('f-jam').value;
     var durasi  = document.getElementById('f-durasi').value;
     var lokasi  = document.getElementById('f-lokasi').value.trim() || 'Tidak disebutkan';
     var catatan = document.getElementById('f-catatan').value.trim() || '-';
 
+    if (!nama) { alert('Mohon isi nama kamu dulu ya!'); return; }
     if (!hari || !jam || !durasi) {
       alert('Mohon isi hari, jam mulai, dan durasi terlebih dahulu ya!');
       return;
@@ -735,14 +736,14 @@
     var tglFormatted = hariNama + ', ' + tglObj.getDate() + '/' + (tglObj.getMonth()+1) + '/' + tglObj.getFullYear();
 
     var pesan =
-      'Halo BisaKok! Saya mau pesan layanan:\n\n' +
-      '🏷️ *Layanan:* ' + modalLayanan + '\n' +
-      '👤 *Nama:* ' + nama + '\n' +
-      '📅 *Hari & Tanggal:* ' + tglFormatted + '\n' +
-      '🕐 *Jam Mulai:* ' + jam + '\n' +
-      '⏱️ *Durasi:* ' + durasi + '\n' +
-      '📍 *Lokasi:* ' + lokasi + '\n' +
-      '📝 *Catatan:* ' + catatan + '\n\n' +
+      'Halo ' + nama + '!\n\n' +
+      'Saya mau pesan layanan *' + modalLayanan + '*.\n\n' +
+      '*Nama:* ' + nama + '\n' +
+      '*Hari & Tanggal:* ' + tglFormatted + '\n' +
+      '*Jam Mulai:* ' + jam + '\n' +
+      '*Durasi:* ' + durasi + '\n' +
+      '*Lokasi:* ' + lokasi + '\n' +
+      '*Catatan:* ' + catatan + '\n\n' +
       'Mohon konfirmasinya, terima kasih!';
 
     var url = 'https://wa.me/6285143863741?text=' + encodeURIComponent(pesan);
@@ -753,7 +754,87 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
+
+  /* ===================== ADMIN & BLOCKED DATES ===================== */
+  var ADMIN_PASS = 'Bisakok499';
+  var adminLoggedIn = false;
+
+  function getBlockedDates() {
+    try { return JSON.parse(localStorage.getItem('bk_blocked') || '{}'); } catch(e) { return {}; }
+  }
+  function saveBlockedDates(obj) {
+    localStorage.setItem('bk_blocked', JSON.stringify(obj));
+  }
+  function isBlocked(dateStr) {
+    var blocked = getBlockedDates();
+    var all = blocked['__semua__'] || [];
+    var kat = blocked[modalLayanan] || [];
+    return all.indexOf(dateStr) !== -1 || kat.indexOf(dateStr) !== -1;
+  }
+
+  /* Validasi tanggal saat user memilih */
+  document.addEventListener('change', function(e) {
+    if (e.target && e.target.id === 'f-hari') {
+      if (isBlocked(e.target.value)) {
+        alert('Maaf, tanggal ' + formatTgl(e.target.value) + ' sudah penuh dan tidak tersedia untuk layanan ' + modalLayanan + '. Silakan pilih tanggal lain.');
+        e.target.value = '';
+      }
+    }
+  });
+
+  function formatTgl(d) {
+    if (!d) return '';
+    var o = new Date(d);
+    var hr = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][o.getDay()];
+    return hr + ', ' + o.getDate() + '/' + (o.getMonth()+1) + '/' + o.getFullYear();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
 </script>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay" onclick="closeAdmin()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;padding:1rem;">
+  <div onclick="event.stopPropagation()" style="background:#fff;border-radius:24px;padding:2rem 1.5rem;width:100%;max-width:360px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">🔐</div>
+    <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:6px;">Panel Admin</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;">Akses panel admin di halaman khusus admin.</p>
+    <a href="admin.html" target="_blank" style="display:block;background:var(--orange);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:99px;text-decoration:none;margin-bottom:10px;">Buka Halaman Admin</a>
+    <button onclick="closeAdmin()" style="width:100%;background:transparent;color:var(--text-muted);font-size:13px;padding:10px;border-radius:99px;border:none;cursor:pointer;">Tutup</button>
+  </div>
+</div>
+<script>
+  function openAdmin() {
+    document.getElementById('admin-overlay').style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+  function closeAdmin() {
+    document.getElementById('admin-overlay').style.display='none';
+    document.body.style.overflow='';
+  }
+</script>
+
+<!-- PEMBAYARAN -->
+<section style="background:#fff;padding:3.5rem 1.5rem;">
+  <p class="sec-label">Pembayaran</p>
+  <h2 class="sec-title">Bayar Lewat DANA</h2>
+  <p class="sec-sub">Setelah deal harga, transfer ke rekening DANA berikut dan kirim bukti pembayaran ke WhatsApp kami.</p>
+  <div style="max-width:380px;margin:0 auto;">
+    <div style="background:var(--gray);border-radius:20px;padding:1.5rem;text-align:center;border:1.5px solid var(--border);margin-bottom:1rem;">
+      <div style="font-size:2rem;margin-bottom:8px;">💙</div>
+      <p style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NOMOR DANA</p>
+      <p style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--dark);letter-spacing:0.04em;">0838-4370-101</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">a.n. <strong>BisaKok</strong></p>
+      <button onclick="copyDana()" id="copy-btn" style="margin-top:14px;background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:99px;border:none;cursor:pointer;">Salin Nomor</button>
+    </div>
+    <a href="https://wa.me/6285143863741?text=Halo%20BisaKok!%20Saya%20mau%20kirim%20bukti%20pembayaran." target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:99px;text-decoration:none;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+      <span style="background:rgba(255,255,255,0.25);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">✓</span>
+      Kirim Bukti Pembayaran ke WA
+    </a>
+    <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;line-height:1.6;">Kirim bukti transfer beserta nama & layanan yang dipesan. Pesanan dikonfirmasi setelah pembayaran terverifikasi.</p>
+  </div>
+</section>
 
 <!-- CARA KERJA -->
 <section class="how" id="cara-kerja">
@@ -851,7 +932,30 @@
   <div class="footer-logo">BisaKok</div>
   <div class="footer-text">Jasa Apapun · Harga Nego · Siap Anytime & Anywhere<br>Melayani dengan sepenuh hati — karena BisaKok, emang bisa!</div>
   <div class="footer-wa">📱 <a href="https://wa.me/6285143863741" target="_blank">+62 851-4386-3741</a></div>
+  <div style="margin-top:1.5rem;">
+    <button onclick="openAdmin()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.35);font-size:11px;padding:5px 14px;border-radius:99px;cursor:pointer;font-family:inherit;">🔐 Admin</button>
+  </div>
 </footer>
+
+<script>
+  function copyDana() {
+    var nomor = '08384370101';
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(nomor).then(function() {
+        var btn = document.getElementById('copy-btn');
+        btn.textContent = 'Tersalin!';
+        setTimeout(function() { btn.textContent = 'Salin Nomor'; }, 2000);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = nomor; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      var btn = document.getElementById('copy-btn');
+      btn.textContent = 'Tersalin!';
+      setTimeout(function() { btn.textContent = 'Salin Nomor'; }, 2000);
+    }
+  }
+</script>
 
 </body>
 </html>
