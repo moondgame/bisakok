@@ -1,930 +1,384 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>BisaKok – Jasa Apapun, Asal Ada Budget-nya</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --orange: #FF6B1A;
-    --orange-dark: #e05500;
-    --orange-light: #FF8C42;
-    --orange-pale: #FFF0E8;
-    --dark: #1C0A00;
-    --dark2: #2E1200;
-    --white: #FFFFFF;
-    --gray: #F7F4F2;
-    --text: #1C0A00;
-    --text-muted: #7A5C4A;
-    --border: rgba(255,107,26,0.15);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    overflow-x: hidden;
-    width: 100%;
-  }
-
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px;
-    width: 100%;
-  }
-
-  .logo {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--orange);
-    letter-spacing: -0.02em;
-  }
-
-  .logo span { color: var(--dark); }
-
-  .nav-cta {
-    background: var(--orange);
-    color: #fff;
-    font-weight: 700;
-    font-size: 12px;
-    padding: 8px 16px;
-    border-radius: 99px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .nav-cta:hover { background: var(--orange-dark); }
-
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, #fff8f4 0%, #fff2e8 60%, #ffe0c8 100%);
-    padding: 4rem 1.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: rgba(255,107,26,0.07);
-    top: -100px; right: -80px;
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(255,140,66,0.06);
-    bottom: -60px; left: -60px;
-    pointer-events: none;
-  }
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,107,26,0.1);
-    color: var(--orange-dark);
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 99px;
-    border: 1px solid rgba(255,107,26,0.25);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 3.2rem);
-    font-weight: 800;
-    color: var(--dark);
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
-    word-break: break-word;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-title .accent { color: var(--orange); }
-
-  .hero-sub {
-    font-size: 15px;
-    color: var(--text-muted);
-    max-width: 460px;
-    margin: 0 auto 2rem;
-    line-height: 1.75;
-    word-break: break-word;
-  }
-
-  .hero-btns {
-    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-    margin-bottom: 2rem;
-  }
-
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--orange);
-    color: #fff;
-    font-weight: 700; font-size: 14px;
-    padding: 13px 26px;
-    border-radius: 99px;
-    text-decoration: none;
-    transition: background 0.15s, transform 0.1s;
-    box-shadow: 0 4px 20px rgba(255,107,26,0.3);
-    white-space: nowrap;
-  }
-  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
-
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: transparent;
-    color: var(--orange-dark);
-    font-weight: 600; font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 99px;
-    border: 1.5px solid var(--orange);
-    text-decoration: none;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .btn-outline:hover { background: var(--orange-pale); }
-
-  .hero-tags {
-    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-    max-width: 500px; margin: 0 auto;
-  }
-
-  .htag {
-    background: #fff;
-    color: var(--text-muted);
-    font-size: 12px; font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 99px;
-    border: 1px solid var(--border);
-    white-space: nowrap;
-  }
-
-  /* STATS */
-  .stats {
-    background: var(--orange);
-    padding: 2rem 1.5rem;
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
-    width: 100%;
-  }
-
-  .stat { text-align: center; min-width: 80px; }
-
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800;
-    color: #fff;
-    display: block;
-  }
-
-  .stat-label {
-    font-size: 11px; font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    margin-top: 2px;
-  }
-
-  /* SECTIONS */
-  section { padding: 3.5rem 1.5rem; width: 100%; }
-
-  .sec-label {
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--orange);
-    text-align: center; margin-bottom: 0.5rem;
-  }
-
-  .sec-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    font-weight: 800;
-    text-align: center;
-    color: var(--dark);
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-    word-break: break-word;
-  }
-
-  .sec-sub {
-    font-size: 14px; color: var(--text-muted);
-    text-align: center; max-width: 460px;
-    margin: 0 auto 2rem; line-height: 1.7;
-  }
-
-  /* SERVICES */
-  .services { background: var(--gray); }
-
-  .svc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    max-width: 760px; margin: 0 auto;
-  }
-
-  .svc-card {
-    background: #fff;
-    border: 1px solid rgba(255,107,26,0.1);
-    border-radius: 20px;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    cursor: pointer;
-  }
-
-  .svc-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(255,107,26,0.15);
-    border-color: rgba(255,107,26,0.5);
-  }
-
-  .svc-card:hover .svc-cta {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .svc-cta {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--orange);
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  .svc-icon { font-size: 32px; margin-bottom: 10px; display: block; }
-
-  .svc-name {
-    font-size: 13px; font-weight: 700;
-    color: var(--dark); margin-bottom: 5px; line-height: 1.3;
-  }
-
-  .svc-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; }
-
-  /* HOW IT WORKS */
-  .how { background: #fff; }
-
-  .steps {
-    max-width: 520px; margin: 0 auto;
-    display: flex; flex-direction: column; gap: 0;
-  }
-
-  .step {
-    display: flex; gap: 18px; align-items: flex-start;
-    padding: 1.1rem 0;
-    border-bottom: 1px dashed rgba(255,107,26,0.15);
-  }
-  .step:last-child { border-bottom: none; }
-
-  .step-num {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--orange);
-    color: #fff;
-    font-weight: 800; font-size: 15px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(255,107,26,0.3);
-  }
-
-  .step-body { flex: 1; padding-top: 6px; }
-
-  .step-title {
-    font-weight: 700; font-size: 14px;
-    color: var(--dark); margin-bottom: 4px;
-  }
-
-  .step-text {
-    font-size: 13px; color: var(--text-muted); line-height: 1.6;
-  }
-
-  /* PRICE */
-  .price { background: var(--gray); }
-
-  .price-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 14px; max-width: 640px; margin: 0 auto 1.5rem;
-  }
-
-  .price-card {
-    background: #fff;
-    border: 1px solid rgba(255,107,26,0.12);
-    border-radius: 20px;
-    padding: 1.5rem 1rem;
-    text-align: center;
-  }
-
-  .price-card.hot {
-    border: 2px solid var(--orange);
-    box-shadow: 0 4px 20px rgba(255,107,26,0.15);
-  }
-
-  .hot-badge {
-    display: inline-block;
-    background: var(--orange);
-    color: #fff;
-    font-size: 10px; font-weight: 700;
-    padding: 3px 10px; border-radius: 99px;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
-  }
-
-  .price-cat {
-    font-size: 12px; font-weight: 600;
-    color: var(--text-muted); margin-bottom: 10px;
-  }
-
-  .price-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.8rem; font-weight: 800;
-    color: var(--orange);
-  }
-
-  .price-unit {
-    font-size: 11px; color: var(--text-muted); margin-top: 4px;
-  }
-
-  .price-note {
-    font-size: 12px; color: var(--text-muted);
-    text-align: center; max-width: 480px; margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* TESTIMONIAL */
-  .testi { background: #fff; }
-
-  .testi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px; max-width: 720px; margin: 0 auto;
-  }
-
-  .testi-card {
-    background: var(--gray);
-    border-radius: 20px;
-    padding: 1.25rem;
-    border: 1px solid var(--border);
-  }
-
-  .testi-stars { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
-
-  .testi-text {
-    font-size: 13px; color: var(--text);
-    line-height: 1.65; margin-bottom: 12px;
-    font-style: italic;
-  }
-
-  .testi-name {
-    font-size: 12px; font-weight: 700; color: var(--dark);
-  }
-
-  .testi-role {
-    font-size: 11px; color: var(--text-muted);
-  }
-
-  /* CTA BOTTOM */
-  .cta-section {
-    background: linear-gradient(135deg, var(--orange) 0%, #ff8c00 100%);
-    padding: 3.5rem 1.5rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  .cta-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
-    font-weight: 800;
-    color: #fff; margin-bottom: 0.75rem;
-    word-break: break-word;
-  }
-
-  .cta-sub {
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 2rem; max-width: 400px;
-    margin-left: auto; margin-right: auto;
-    line-height: 1.7;
-  }
-
-  .btn-white {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #fff;
-    color: var(--orange-dark);
-    font-weight: 800; font-size: 14px;
-    padding: 14px 28px;
-    border-radius: 99px;
-    text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    white-space: nowrap;
-  }
-  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
-
-  .wa-icon {
-    width: 20px; height: 20px;
-    background: #25D366;
-    border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 12px; color: #fff;
-    flex-shrink: 0;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--dark);
-    padding: 2rem 1.5rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  .footer-logo {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--orange);
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-text {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.7;
-  }
-
-  .footer-wa {
-    margin-top: 0.75rem;
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .footer-wa a {
-    color: var(--orange-light);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 600px) {
-    .hero-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
-    .sec-title { font-size: clamp(1.2rem, 6vw, 1.6rem); }
-    .svc-grid { grid-template-columns: repeat(2, 1fr); }
-    .price-cards { grid-template-columns: 1fr; max-width: 300px; }
-    .testi-grid { grid-template-columns: 1fr; }
-    .stats { gap: 1rem; }
-    .stat-num { font-size: 1.3rem; }
-    .btn-primary, .btn-outline { font-size: 13px; padding: 11px 20px; }
-    .hero-btns { flex-direction: column; align-items: center; }
-    .btn-white { font-size: 13px; padding: 12px 22px; }
-  }
-
-  @media (min-width: 601px) and (max-width: 900px) {
-    .hero-title { font-size: clamp(1.8rem, 5vw, 2.6rem); }
-    .svc-grid { grid-template-columns: repeat(3, 1fr); }
-    .price-cards { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  @media (min-width: 901px) {
-    .hero { padding: 5rem 3rem; }
-    section { padding: 4rem 3rem; }
-    .svc-grid { grid-template-columns: repeat(4, 1fr); }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --orange:#FF6B1A;--orange-dark:#e05500;--orange-light:#FF8C42;--orange-pale:#FFF0E8;
+  --dark:#1C0A00;--white:#FFFFFF;--gray:#F7F4F2;--gray2:#EDE9E5;
+  --text:#1C0A00;--text-muted:#7A5C4A;--border:rgba(255,107,26,0.15);
+  --card-bg:#FFFFFF;--body-bg:#FFFFFF;--nav-bg:rgba(255,255,255,0.95);
+  --section-alt:#F7F4F2;--input-bg:#FFFFFF;--shadow:0 4px 24px rgba(255,107,26,0.10);
+  --green:#16a34a;--green-pale:#f0fdf4;--red:#dc2626;--red-pale:#fef2f2;
+}
+[data-theme="dark"]{
+  --dark:#FFEEDD;--white:#1a0e00;--gray:#2a1800;--gray2:#3a2200;
+  --text:#FFEEDD;--text-muted:#C49A6C;--border:rgba(255,150,80,0.2);
+  --card-bg:#231200;--body-bg:#140900;--nav-bg:rgba(20,9,0,0.97);
+  --section-alt:#1e1000;--input-bg:#2a1800;--orange-pale:#2a1200;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--body-bg);overflow-x:hidden;width:100%;transition:background 0.3s,color 0.3s;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;width:100%;transition:background 0.3s;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--orange);letter-spacing:-0.02em;text-decoration:none;}
+.logo span{color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:6px;}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 11px;border-radius:99px;}
+.status-badge.available{background:var(--green-pale);color:var(--green);border:1px solid rgba(22,163,74,0.2);}
+.status-badge.busy{background:var(--red-pale);color:var(--red);border:1px solid rgba(220,38,38,0.2);}
+.status-dot{width:7px;height:7px;border-radius:50%;}
+.status-badge.available .status-dot{background:var(--green);animation:pulse 1.5s infinite;}
+.status-badge.busy .status-dot{background:var(--red);}
+.theme-toggle{background:var(--gray);border:1px solid var(--border);border-radius:99px;padding:5px 9px;cursor:pointer;font-size:13px;transition:background 0.2s;flex-shrink:0;}
+.lang-btn{background:transparent;border:1px solid var(--border);border-radius:8px;padding:5px 9px;font-size:11px;font-weight:700;color:var(--text-muted);cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.lang-btn:hover{border-color:var(--orange);color:var(--orange);}
+.nav-cta{background:var(--orange);color:#fff;font-weight:700;font-size:12px;padding:8px 14px;border-radius:99px;text-decoration:none;border:none;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.nav-cta:hover{background:var(--orange-dark);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--orange-pale) 0%,#fff2e8 60%,#ffe0c8 100%);padding:4rem 1.5rem;text-align:center;position:relative;overflow:hidden;width:100%;}
+[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e0800 0%,#2a1200 100%);}
+.hero::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,107,26,0.07);top:-100px;right:-80px;pointer-events:none;}
+.hero::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,140,66,0.06);bottom:-60px;left:-60px;pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,26,0.1);color:var(--orange-dark);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:99px;border:1px solid rgba(255,107,26,0.25);margin-bottom:1.5rem;}
+[data-theme="dark"] .hero-badge{color:var(--orange-light);}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;color:var(--text);line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em;word-break:break-word;max-width:700px;margin-left:auto;margin-right:auto;}
+.hero-title .accent{color:var(--orange);}
+.hero-sub{font-size:15px;color:var(--text-muted);max-width:460px;margin:0 auto 1.5rem;line-height:1.75;word-break:break-word;}
+.hero-status{display:inline-flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--border);border-radius:99px;padding:8px 18px;margin-bottom:2rem;font-size:13px;font-weight:600;color:var(--text);}
+.hero-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:2rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;padding:13px 26px;border-radius:99px;text-decoration:none;transition:background 0.15s,transform 0.1s;box-shadow:0 4px 20px rgba(255,107,26,0.3);white-space:nowrap;}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-1px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--orange-dark);font-weight:600;font-size:14px;padding:12px 24px;border-radius:99px;border:1.5px solid var(--orange);text-decoration:none;transition:background 0.15s;white-space:nowrap;}
+[data-theme="dark"] .btn-outline{color:var(--orange-light);}
+.btn-outline:hover{background:var(--orange-pale);}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:500px;margin:0 auto;}
+.htag{background:var(--card-bg);color:var(--text-muted);font-size:12px;font-weight:500;padding:5px 12px;border-radius:99px;border:1px solid var(--border);white-space:nowrap;}
+
+/* STATS */
+.stats{background:var(--orange);padding:2rem 1.5rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;width:100%;}
+.stat{text-align:center;min-width:80px;}
+.stat-num{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:800;color:#fff;display:block;}
+.stat-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.75);margin-top:2px;}
+
+/* SECTIONS */
+section{padding:3.5rem 1.5rem;width:100%;}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);text-align:center;margin-bottom:0.5rem;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:800;text-align:center;color:var(--text);margin-bottom:0.75rem;letter-spacing:-0.01em;word-break:break-word;}
+.sec-sub{font-size:14px;color:var(--text-muted);text-align:center;max-width:460px;margin:0 auto 2rem;line-height:1.7;}
+
+/* SERVICES */
+.services{background:var(--section-alt);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:760px;margin:0 auto;}
+.svc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:1.5rem 1rem;text-align:center;transition:transform 0.15s,box-shadow 0.15s,border-color 0.15s;cursor:pointer;}
+.svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(255,107,26,0.5);}
+.svc-card:hover .svc-cta{opacity:1;transform:translateY(0);}
+.svc-icon{font-size:32px;margin-bottom:10px;display:block;}
+.svc-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.3;}
+.svc-desc{font-size:11.5px;color:var(--text-muted);line-height:1.5;}
+.svc-cta{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--orange);opacity:0;transform:translateY(4px);transition:opacity 0.2s,transform 0.2s;}
+
+/* CALENDAR */
+.calendar-wrap{max-width:420px;margin:0 auto;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.cal-month{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--text);}
+.cal-nav{background:var(--gray);border:none;border-radius:10px;width:34px;height:34px;cursor:pointer;font-size:16px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;}
+.cal-nav:hover{background:var(--gray2);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-name{text-align:center;font-size:10px;font-weight:700;color:var(--text-muted);padding:4px 0;}
+.cal-day{text-align:center;border-radius:10px;padding:8px 2px;font-size:12px;font-weight:600;cursor:default;}
+.cal-day.empty{visibility:hidden;}
+.cal-day.available{background:var(--green-pale);color:var(--green);}
+.cal-day.blocked{background:var(--red-pale);color:var(--red);text-decoration:line-through;}
+.cal-day.today{outline:2px solid var(--orange);}
+.cal-day.past{opacity:0.3;}
+.cal-legend{display:flex;gap:16px;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+.cal-leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);}
+.cal-leg-dot{width:10px;height:10px;border-radius:3px;}
+
+/* HOW */
+.how{background:var(--card-bg);}
+.steps{max-width:520px;margin:0 auto;display:flex;flex-direction:column;}
+.step{display:flex;gap:18px;align-items:flex-start;padding:1.1rem 0;border-bottom:1px dashed var(--border);}
+.step:last-child{border-bottom:none;}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body{flex:1;padding-top:6px;}
+.step-title{font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px;}
+.step-text{font-size:13px;color:var(--text-muted);line-height:1.6;}
+
+/* PRICE */
+.price{background:var(--section-alt);}
+.price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:640px;margin:0 auto 1.5rem;}
+.price-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:1.5rem 1rem;text-align:center;}
+.price-card.hot{border:2px solid var(--orange);box-shadow:0 4px 20px rgba(255,107,26,0.15);}
+.hot-badge{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:10px;}
+.price-cat{font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px;}
+.price-val{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);}
+.price-unit{font-size:11px;color:var(--text-muted);margin-top:4px;}
+.price-note{font-size:12px;color:var(--text-muted);text-align:center;max-width:480px;margin:0 auto;line-height:1.6;}
+
+/* REVIEWS */
+.reviews{background:var(--card-bg);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:780px;margin:0 auto 2rem;}
+.review-card{background:var(--section-alt);border-radius:20px;padding:1.25rem;border:1px solid var(--border);}
+.review-stars{color:var(--orange);font-size:13px;margin-bottom:8px;}
+.review-text{font-size:13px;color:var(--text);line-height:1.65;margin-bottom:12px;font-style:italic;}
+.review-meta{display:flex;align-items:center;gap:8px;}
+.review-avatar{width:32px;height:32px;border-radius:50%;background:var(--orange);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.review-name{font-size:12px;font-weight:700;color:var(--text);}
+.review-role{font-size:11px;color:var(--text-muted);}
+.review-form{max-width:480px;margin:0 auto;background:var(--section-alt);border-radius:20px;padding:1.5rem;border:1px solid var(--border);}
+.review-form-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:1rem;text-align:center;}
+.star-select{display:flex;gap:6px;justify-content:center;margin-bottom:1rem;}
+.star-btn{font-size:26px;cursor:pointer;opacity:0.25;transition:opacity 0.15s,transform 0.1s;background:none;border:none;padding:2px;color:var(--orange);}
+.star-btn.selected{opacity:1;}
+.star-btn:hover{transform:scale(1.2);opacity:0.8;}
+.form-input{width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:13px;font-family:inherit;outline:none;background:var(--input-bg);color:var(--text);margin-bottom:10px;transition:border-color 0.15s;}
+.form-input:focus{border-color:var(--orange);}
+.submit-review-btn{width:100%;background:var(--orange);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:99px;border:none;cursor:pointer;transition:background 0.15s;}
+.submit-review-btn:hover{background:var(--orange-dark);}
+
+/* PAYMENT */
+.payment{background:var(--section-alt);}
+.dana-card{background:var(--card-bg);border-radius:20px;padding:1.5rem;text-align:center;border:1.5px solid var(--border);margin-bottom:1rem;max-width:380px;margin-left:auto;margin-right:auto;}
+.copy-btn{margin-top:14px;background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:99px;border:none;cursor:pointer;transition:background 0.15s;}
+.copy-btn:hover{background:var(--orange-dark);}
+.wa-pay-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:99px;text-decoration:none;max-width:380px;margin:0 auto;transition:opacity 0.15s;}
+.wa-pay-btn:hover{opacity:0.9;}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--orange) 0%,#ff8c00 100%);padding:3.5rem 1.5rem;text-align:center;width:100%;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,4vw,2.2rem);font-weight:800;color:#fff;margin-bottom:0.75rem;word-break:break-word;}
+.cta-sub{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.btn-white{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--orange-dark);font-weight:800;font-size:14px;padding:14px 28px;border-radius:99px;text-decoration:none;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 20px rgba(0,0,0,0.15);white-space:nowrap;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2);}
+.wa-icon{width:20px;height:20px;background:#25D366;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex-shrink:0;}
+
+/* SHARE */
+.share-bar{background:var(--card-bg);padding:1.5rem;text-align:center;border-top:1px solid var(--border);}
+.share-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:10px;}
+.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.share-btn{padding:8px 16px;border-radius:99px;font-size:12px;font-weight:700;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity 0.15s;font-family:inherit;}
+.share-btn:hover{opacity:0.85;}
+.share-wa{background:#25D366;color:#fff;}
+.share-copy{background:var(--gray);color:var(--text-muted);}
+
+/* FOOTER */
+footer{background:#1C0A00;padding:2rem 1.5rem;text-align:center;width:100%;}
+[data-theme="dark"] footer{background:#0a0400;}
+.footer-logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--orange);margin-bottom:0.5rem;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;}
+.footer-wa{margin-top:0.75rem;font-size:13px;color:rgba(255,255,255,0.5);}
+.footer-wa a{color:var(--orange-light);text-decoration:none;font-weight:600;}
+.footer-bottom{margin-top:1.5rem;display:flex;gap:10px;justify-content:center;}
+.admin-link{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:11px;padding:5px 14px;border-radius:99px;cursor:pointer;text-decoration:none;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;align-items:center;justify-content:center;padding:1rem;}
+.modal-box{background:var(--card-bg);border-radius:24px;padding:2rem 1.5rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--gray);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;color:var(--text-muted);display:flex;align-items:center;justify-content:center;}
+.field-wrap{margin-bottom:12px;}
+.field-label{font-size:12px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:5px;}
+.field-input{width:100%;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;font-family:inherit;outline:none;background:var(--input-bg);color:var(--text);transition:border-color 0.15s;}
+.field-input:focus{border-color:var(--orange);}
+.wa-submit-btn{width:100%;background:var(--orange);color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:99px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.15s;margin-top:4px;}
+.wa-submit-btn:hover{background:var(--orange-dark);}
+
+/* TOAST */
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C0A00;color:#fff;font-size:13px;font-weight:600;padding:10px 22px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity 0.3s;white-space:nowrap;z-index:9999;}
+[data-theme="dark"] #toast{background:var(--orange);color:#fff;}
+#toast.show{opacity:1;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hero-title{font-size:clamp(1.6rem,8vw,2.2rem);}
+  .sec-title{font-size:clamp(1.2rem,6vw,1.6rem);}
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .price-cards{grid-template-columns:1fr;max-width:300px;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-outline,.btn-white{font-size:13px;padding:11px 20px;}
+  .nav-right .lang-btn{display:none;}
+}
+@media(min-width:601px) and (max-width:900px){
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
+  .price-cards{grid-template-columns:repeat(3,1fr);}
+}
+@media(min-width:901px){
+  .hero{padding:5rem 3rem;}
+  section{padding:4rem 3rem;}
+  .svc-grid{grid-template-columns:repeat(4,1fr);}
+}
 </style>
 </head>
 <body>
 
+<div id="toast"></div>
+
 <!-- NAV -->
 <nav>
-  <div class="logo">Bisa<span>Kok</span></div>
-  <a class="nav-cta" href="https://wa.me/6285143863741?text=Halo%20BisaKok!%20Aku%20mau%20tanya%20soal%20layanan%20kamu" target="_blank">Chat WA Sekarang</a>
+  <a class="logo" href="#">Bisa<span>Kok</span></a>
+  <div class="nav-right">
+    <div id="nav-status" class="status-badge available"><span class="status-dot"></span><span id="status-text">Tersedia</span></div>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">EN</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
+    <a class="nav-cta" href="https://wa.me/6285143863741?text=Halo!%20Saya%20mau%20tanya%20soal%20layanan%20BisaKok." target="_blank">Chat WA</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">✦ Jasa Fleksibel No. 1 ✦</div>
-  <h1 class="hero-title">Apapun Tugasnya,<br><span class="accent">BisaKok!</span></h1>
-  <p class="hero-sub">Pacar sewaan, teman jalan, ojek personal, cuci kendaraan, atau tugas lainnya? Hubungi aja — harga nego, nggak ribet, langsung beres.</p>
-  <div class="hero-btns">
-    <a class="btn-primary" href="https://wa.me/6285143863741?text=Halo%20BisaKok!%20Aku%20mau%20pesan%20jasa%20kamu" target="_blank">
-      <span>💬</span> Pesan Lewat WA
-    </a>
+  <div class="hero-badge reveal" id="hero-badge">✦ Jasa Fleksibel No. 1 ✦</div>
+  <h1 class="hero-title reveal" id="hero-title">Apapun Tugasnya,<br><span class="accent">BisaKok!</span></h1>
+  <p class="hero-sub reveal" id="hero-sub">Pacar sewaan, teman jalan, ojek personal, atau tugas lainnya? Hubungi aja — harga nego, nggak ribet, langsung beres.</p>
+  <div class="hero-status reveal">
+    <span id="hero-dot" style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 1.5s infinite;"></span>
+    <span id="hero-status-label">Sekarang Tersedia — Siap Menerima Pesanan</span>
+  </div>
+  <div class="hero-btns reveal">
+    <a class="btn-primary" href="https://wa.me/6285143863741?text=Halo!%20Saya%20mau%20pesan%20layanan%20BisaKok." target="_blank" id="hero-cta">💬 Pesan Lewat WA</a>
     <a class="btn-outline" href="#layanan">Lihat Semua Layanan</a>
   </div>
-  <div class="hero-tags">
-    <span class="htag">✅ Terpercaya</span>
-    <span class="htag">⚡ Respon Cepat</span>
-    <span class="htag">🤝 Harga Nego</span>
-    <span class="htag">📍 Siap ke Mana Aja</span>
-    <span class="htag">😊 No Drama</span>
+  <div class="hero-tags reveal">
+    <span class="htag">✅ Terpercaya</span><span class="htag">⚡ Respon Cepat</span>
+    <span class="htag">🤝 Harga Nego</span><span class="htag">📍 Siap ke Mana Aja</span><span class="htag">😊 No Drama</span>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat">
-    <span class="stat-num">100+</span>
-    <span class="stat-label">Pesanan Selesai</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">50+</span>
-    <span class="stat-label">Pelanggan Puas</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">8+</span>
-    <span class="stat-label">Jenis Layanan</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">⭐ 4.9</span>
-    <span class="stat-label">Rating Rata-rata</span>
-  </div>
+  <div class="stat reveal"><span class="stat-num">100+</span><span class="stat-label">Pesanan Selesai</span></div>
+  <div class="stat reveal"><span class="stat-num">50+</span><span class="stat-label">Pelanggan Puas</span></div>
+  <div class="stat reveal"><span class="stat-num">8+</span><span class="stat-label">Jenis Layanan</span></div>
+  <div class="stat reveal"><span class="stat-num">⭐ 4.9</span><span class="stat-label">Rating Rata-rata</span></div>
 </div>
 
 <!-- LAYANAN -->
 <section class="services" id="layanan">
-  <p class="sec-label">Layanan Tersedia</p>
-  <h2 class="sec-title">Kamu Minta, BisaKok Kerjain</h2>
-  <p class="sec-sub">Dari yang simpel sampai yang butuh kreativitas ekstra — semua bisa, selama masuk akal dan ada deal-nya.</p>
+  <p class="sec-label reveal">Layanan Tersedia</p>
+  <h2 class="sec-title reveal">Kamu Minta, BisaKok Kerjain</h2>
+  <p class="sec-sub reveal">Dari yang simpel sampai yang butuh kreativitas ekstra — semua bisa, selama masuk akal dan ada deal-nya.</p>
   <div class="svc-grid">
-    <div class="svc-card" onclick="openModal('Pacar Sewaan','❤️')">
-      <span class="svc-icon">❤️</span>
-      <div class="svc-name">Pacar Sewaan</div>
-      <div class="svc-desc">Kencan, acara keluarga, atau nemenin di medsos</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Teman Jalan','🚶')">
-      <span class="svc-icon">🚶</span>
-      <div class="svc-name">Teman Jalan</div>
-      <div class="svc-desc">Mall, wisata, atau ke mana pun kamu mau</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Teman Makan','🍜')">
-      <span class="svc-icon">🍜</span>
-      <div class="svc-name">Teman Makan</div>
-      <div class="svc-desc">Biar nggak makan sendirian lagi</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Teman Ngobrol','💬')">
-      <span class="svc-icon">💬</span>
-      <div class="svc-name">Teman Ngobrol</div>
-      <div class="svc-desc">Curhat, diskusi, atau sekadar teman bicara</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Jemput & Antar','🚗')">
-      <span class="svc-icon">🚗</span>
-      <div class="svc-name">Jemput & Antar</div>
-      <div class="svc-desc">Ke mana pun sesuai permintaan</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Teman Main / Nongkrong','🎮')">
-      <span class="svc-icon">🎮</span>
-      <div class="svc-name">Teman Main / Nongkrong</div>
-      <div class="svc-desc">Gaming, café, atau nongkrong bareng biar nggak bosen</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Titip & Antar Barang','📦')">
-      <span class="svc-icon">📦</span>
-      <div class="svc-name">Titip & Antar Barang</div>
-      <div class="svc-desc">Belanja, kirim paket, atau ambil sesuatu</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
-    <div class="svc-card" onclick="openModal('Request Lainnya','✨')">
-      <span class="svc-icon">✨</span>
-      <div class="svc-name">Request Lainnya</div>
-      <div class="svc-desc">Ada kebutuhan lain? Ngobrol dulu, pasti bisa diatur!</div>
-      <div class="svc-cta">Pesan →</div>
-    </div>
+    <div class="svc-card reveal" onclick="openModal('Pacar Sewaan','❤️')"><span class="svc-icon">❤️</span><div class="svc-name">Pacar Sewaan</div><div class="svc-desc">Kencan, acara keluarga, atau nemenin di medsos</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Teman Jalan','🚶')"><span class="svc-icon">🚶</span><div class="svc-name">Teman Jalan</div><div class="svc-desc">Mall, wisata, atau ke mana pun kamu mau</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Teman Makan','🍜')"><span class="svc-icon">🍜</span><div class="svc-name">Teman Makan</div><div class="svc-desc">Biar nggak makan sendirian lagi</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Teman Ngobrol','💬')"><span class="svc-icon">💬</span><div class="svc-name">Teman Ngobrol</div><div class="svc-desc">Curhat, diskusi, atau sekadar teman bicara</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Jemput & Antar','🚗')"><span class="svc-icon">🚗</span><div class="svc-name">Jemput & Antar</div><div class="svc-desc">Ke mana pun sesuai permintaan</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Teman Main / Nongkrong','🎮')"><span class="svc-icon">🎮</span><div class="svc-name">Teman Main / Nongkrong</div><div class="svc-desc">Gaming, café, atau nongkrong bareng</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Titip & Antar Barang','📦')"><span class="svc-icon">📦</span><div class="svc-name">Titip & Antar Barang</div><div class="svc-desc">Belanja, kirim paket, atau ambil sesuatu</div><div class="svc-cta">Pesan →</div></div>
+    <div class="svc-card reveal" onclick="openModal('Request Lainnya','✨')"><span class="svc-icon">✨</span><div class="svc-name">Request Lainnya</div><div class="svc-desc">Ada kebutuhan lain? Pasti bisa diatur!</div><div class="svc-cta">Pesan →</div></div>
   </div>
 </section>
 
-<!-- POPUP MODAL -->
-<div id="modal-overlay" onclick="closeModal()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999; align-items:center; justify-content:center; padding:1rem;">
-  <div id="modal-box" onclick="event.stopPropagation()" style="background:#fff; border-radius:24px; padding:2rem 1.5rem; width:100%; max-width:420px; max-height:90vh; overflow-y:auto; position:relative;">
-
-    <!-- Close -->
-    <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:var(--gray); border:none; border-radius:50%; width:32px; height:32px; font-size:16px; cursor:pointer; color:var(--text-muted); display:flex; align-items:center; justify-content:center;">✕</button>
-
-    <!-- Header -->
-    <div style="text-align:center; margin-bottom:1.5rem;">
-      <div id="modal-icon" style="font-size:2.5rem; margin-bottom:8px;">💑</div>
-      <h3 id="modal-title" style="font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--dark);">Pacar Sewaan</h3>
-      <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Isi detail pesanan kamu di bawah ini</p>
+<!-- KALENDER -->
+<section style="background:var(--card-bg);" id="jadwal">
+  <p class="sec-label reveal">Jadwal</p>
+  <h2 class="sec-title reveal">Cek Ketersediaan</h2>
+  <p class="sec-sub reveal">Tanggal merah = penuh / tidak tersedia. Tanggal hijau = masih bisa dipesan.</p>
+  <div class="calendar-wrap reveal">
+    <div class="cal-header">
+      <button class="cal-nav" onclick="calPrev()">‹</button>
+      <span class="cal-month" id="cal-month-label"></span>
+      <button class="cal-nav" onclick="calNext()">›</button>
     </div>
-
-    <!-- Form -->
-    <div style="display:flex; flex-direction:column; gap:14px;">
-
-      <!-- Nama -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Nama Kamu</label>
-        <input id="f-nama" type="text" placeholder="Contoh: Budi" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
-      </div>
-
-      <!-- Hari -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Hari & Tanggal</label>
-        <input id="f-hari" type="date" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
-      </div>
-
-      <!-- Jam mulai -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Jam Mulai</label>
-        <input id="f-jam" type="time" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
-      </div>
-
-      <!-- Durasi -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Durasi</label>
-        <select id="f-durasi" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none; background:#fff; cursor:pointer;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'">
-          <option value="">-- Pilih durasi --</option>
-          <option>1 jam</option>
-          <option>2 jam</option>
-          <option>3 jam</option>
-          <option>4 jam</option>
-          <option>5 jam</option>
-          <option>6 jam</option>
-          <option>Setengah hari (±5 jam)</option>
-          <option>Full day (±10 jam)</option>
-        </select>
-      </div>
-
-      <!-- Lokasi -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Lokasi / Alamat Jemput</label>
-        <input id="f-lokasi" type="text" placeholder="Contoh: Mataram, Lombok" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"/>
-      </div>
-
-      <!-- Catatan -->
-      <div>
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">Catatan Tambahan <span style="font-weight:400;">(opsional)</span></label>
-        <textarea id="f-catatan" rows="3" placeholder="Ceritain lebih detail kebutuhanmu..." style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); font-size:14px; font-family:inherit; outline:none; resize:none;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-      </div>
-
-      <!-- Tombol WA -->
-      <button onclick="kirimWA()" style="width:100%; background:var(--orange); color:#fff; font-weight:800; font-size:15px; padding:14px; border-radius:99px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s; margin-top:4px;">
-        <span style="background:#25D366; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;">✓</span>
-        Lanjut ke WhatsApp
-      </button>
-
-      <p style="text-align:center; font-size:11px; color:var(--text-muted);">Pesan akan terkirim otomatis ke WhatsApp BisaKok</p>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-legend">
+      <div class="cal-leg"><div class="cal-leg-dot" style="background:var(--green-pale);border:1px solid var(--green);"></div><span>Tersedia</span></div>
+      <div class="cal-leg"><div class="cal-leg-dot" style="background:var(--red-pale);border:1px solid var(--red);"></div><span>Penuh / Diblokir</span></div>
+      <div class="cal-leg"><div class="cal-leg-dot" style="border:2px solid var(--orange);"></div><span>Hari Ini</span></div>
     </div>
-  </div>
-</div>
-
-<script>
-  var modalLayanan = '';
-
-  function openModal(namaLayanan, icon) {
-    modalLayanan = namaLayanan;
-    document.getElementById('modal-title').textContent = namaLayanan;
-    document.getElementById('modal-icon').textContent = icon;
-    document.getElementById('f-nama').value = '';
-    document.getElementById('f-hari').value = '';
-    document.getElementById('f-jam').value = '';
-    document.getElementById('f-durasi').value = '';
-    document.getElementById('f-lokasi').value = '';
-    document.getElementById('f-catatan').value = '';
-    var overlay = document.getElementById('modal-overlay');
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modal-overlay').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  function kirimWA() {
-    var nama    = document.getElementById('f-nama').value.trim();
-    var hari    = document.getElementById('f-hari').value;
-    var jam     = document.getElementById('f-jam').value;
-    var durasi  = document.getElementById('f-durasi').value;
-    var lokasi  = document.getElementById('f-lokasi').value.trim() || 'Tidak disebutkan';
-    var catatan = document.getElementById('f-catatan').value.trim() || '-';
-
-    if (!nama) { alert('Mohon isi nama kamu dulu ya!'); return; }
-    if (!hari || !jam || !durasi) {
-      alert('Mohon isi hari, jam mulai, dan durasi terlebih dahulu ya!');
-      return;
-    }
-
-    var tglObj = new Date(hari);
-    var hariNama = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][tglObj.getDay()];
-    var tglFormatted = hariNama + ', ' + tglObj.getDate() + '/' + (tglObj.getMonth()+1) + '/' + tglObj.getFullYear();
-
-    var pesan =
-      'Halo ' + nama + '!\n\n' +
-      'Saya mau pesan layanan *' + modalLayanan + '*.\n\n' +
-      '*Nama:* ' + nama + '\n' +
-      '*Hari & Tanggal:* ' + tglFormatted + '\n' +
-      '*Jam Mulai:* ' + jam + '\n' +
-      '*Durasi:* ' + durasi + '\n' +
-      '*Lokasi:* ' + lokasi + '\n' +
-      '*Catatan:* ' + catatan + '\n\n' +
-      'Mohon konfirmasinya, terima kasih!';
-
-    var url = 'https://wa.me/6285143863741?text=' + encodeURIComponent(pesan);
-    window.open(url, '_blank');
-    closeModal();
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  /* ===================== ADMIN & BLOCKED DATES ===================== */
-  var ADMIN_PASS = 'Bisakok499';
-  var adminLoggedIn = false;
-
-  function getBlockedDates() {
-    try { return JSON.parse(localStorage.getItem('bk_blocked') || '{}'); } catch(e) { return {}; }
-  }
-  function saveBlockedDates(obj) {
-    localStorage.setItem('bk_blocked', JSON.stringify(obj));
-  }
-  function isBlocked(dateStr) {
-    var blocked = getBlockedDates();
-    var all = blocked['__semua__'] || [];
-    var kat = blocked[modalLayanan] || [];
-    return all.indexOf(dateStr) !== -1 || kat.indexOf(dateStr) !== -1;
-  }
-
-  /* Validasi tanggal saat user memilih */
-  document.addEventListener('change', function(e) {
-    if (e.target && e.target.id === 'f-hari') {
-      if (isBlocked(e.target.value)) {
-        alert('Maaf, tanggal ' + formatTgl(e.target.value) + ' sudah penuh dan tidak tersedia untuk layanan ' + modalLayanan + '. Silakan pilih tanggal lain.');
-        e.target.value = '';
-      }
-    }
-  });
-
-  function formatTgl(d) {
-    if (!d) return '';
-    var o = new Date(d);
-    var hr = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][o.getDay()];
-    return hr + ', ' + o.getDate() + '/' + (o.getMonth()+1) + '/' + o.getFullYear();
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-</script>
-
-<!-- ADMIN OVERLAY -->
-<div id="admin-overlay" onclick="closeAdmin()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;padding:1rem;">
-  <div onclick="event.stopPropagation()" style="background:#fff;border-radius:24px;padding:2rem 1.5rem;width:100%;max-width:360px;text-align:center;">
-    <div style="font-size:2rem;margin-bottom:12px;">🔐</div>
-    <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:6px;">Panel Admin</h3>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;">Akses panel admin di halaman khusus admin.</p>
-    <a href="admin.html" target="_blank" style="display:block;background:var(--orange);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:99px;text-decoration:none;margin-bottom:10px;">Buka Halaman Admin</a>
-    <button onclick="closeAdmin()" style="width:100%;background:transparent;color:var(--text-muted);font-size:13px;padding:10px;border-radius:99px;border:none;cursor:pointer;">Tutup</button>
-  </div>
-</div>
-<script>
-  function openAdmin() {
-    document.getElementById('admin-overlay').style.display='flex';
-    document.body.style.overflow='hidden';
-  }
-  function closeAdmin() {
-    document.getElementById('admin-overlay').style.display='none';
-    document.body.style.overflow='';
-  }
-</script>
-
-<!-- PEMBAYARAN -->
-<section style="background:#fff;padding:3.5rem 1.5rem;">
-  <p class="sec-label">Pembayaran</p>
-  <h2 class="sec-title">Bayar Lewat DANA</h2>
-  <p class="sec-sub">Setelah deal harga, transfer ke rekening DANA berikut dan kirim bukti pembayaran ke WhatsApp kami.</p>
-  <div style="max-width:380px;margin:0 auto;">
-    <div style="background:var(--gray);border-radius:20px;padding:1.5rem;text-align:center;border:1.5px solid var(--border);margin-bottom:1rem;">
-      <div style="font-size:2rem;margin-bottom:8px;">💙</div>
-      <p style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NOMOR DANA</p>
-      <p style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--dark);letter-spacing:0.04em;">0838-4370-101</p>
-      <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">a.n. <strong>BisaKok</strong></p>
-      <button onclick="copyDana()" id="copy-btn" style="margin-top:14px;background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:9px 22px;border-radius:99px;border:none;cursor:pointer;">Salin Nomor</button>
-    </div>
-    <a href="https://wa.me/6285143863741?text=Halo%20BisaKok!%20Saya%20mau%20kirim%20bukti%20pembayaran." target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:99px;text-decoration:none;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-      <span style="background:rgba(255,255,255,0.25);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">✓</span>
-      Kirim Bukti Pembayaran ke WA
-    </a>
-    <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;line-height:1.6;">Kirim bukti transfer beserta nama & layanan yang dipesan. Pesanan dikonfirmasi setelah pembayaran terverifikasi.</p>
   </div>
 </section>
 
 <!-- CARA KERJA -->
 <section class="how" id="cara-kerja">
-  <p class="sec-label">Cara Kerja</p>
-  <h2 class="sec-title">Gampang Banget, 3 Langkah Beres</h2>
+  <p class="sec-label reveal">Cara Kerja</p>
+  <h2 class="sec-title reveal">Gampang Banget, 3 Langkah Beres</h2>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">Hubungi & Ceritain Kebutuhanmu</div>
-        <div class="step-text">Chat via WhatsApp, jelasin apa yang kamu butuhkan, kapan, dan di mana. Makin detail makin baik.</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">Deal Harga & Jadwal</div>
-        <div class="step-text">Harga dibicarain bareng, transparan, dan 100% bisa nego. Nggak ada biaya tersembunyi sama sekali.</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">Tugas Dikerjain, Bayar Setelah Beres</div>
-        <div class="step-text">BisaKok datang, kerjain tugasnya dengan sepenuh hati. Bayar setelah pekerjaan selesai dan kamu puas.</div>
-      </div>
-    </div>
+    <div class="step reveal"><div class="step-num">1</div><div class="step-body"><div class="step-title">Hubungi & Ceritain Kebutuhanmu</div><div class="step-text">Chat via WhatsApp, jelasin apa yang kamu butuhkan, kapan, dan di mana. Makin detail makin baik.</div></div></div>
+    <div class="step reveal"><div class="step-num">2</div><div class="step-body"><div class="step-title">Deal Harga & Jadwal</div><div class="step-text">Harga dibicarain bareng, transparan, dan 100% bisa nego. Nggak ada biaya tersembunyi.</div></div></div>
+    <div class="step reveal"><div class="step-num">3</div><div class="step-body"><div class="step-title">Tugas Dikerjain, Bayar Setelah Beres</div><div class="step-text">BisaKok datang, kerjain tugasnya dengan sepenuh hati. Bayar setelah pekerjaan selesai dan kamu puas.</div></div></div>
   </div>
 </section>
 
 <!-- HARGA -->
 <section class="price" id="harga">
-  <p class="sec-label">Soal Harga</p>
-  <h2 class="sec-title">Semuanya Bisa Nego!</h2>
-  <p class="sec-sub">Nggak ada tarif kaku di sini. Harga disesuaikan dengan jenis tugas, durasi, dan kesepakatan bersama.</p>
+  <p class="sec-label reveal">Soal Harga</p>
+  <h2 class="sec-title reveal">Semuanya Bisa Nego!</h2>
+  <p class="sec-sub reveal">Nggak ada tarif kaku. Harga disesuaikan dengan jenis tugas, durasi, dan kesepakatan bersama.</p>
   <div class="price-cards">
-    <div class="price-card">
-      <div class="price-cat">Teman & Obrolan</div>
-      <div class="price-val">NEGO</div>
-      <div class="price-unit">Diskusi dulu yuk!</div>
-    </div>
-    <div class="price-card hot">
-      <div class="hot-badge">⚡ Paling Sering Dipesan</div>
-      <div class="price-cat">Teman Jalan & Aktivitas</div>
-      <div class="price-val">NEGO</div>
-      <div class="price-unit">Tergantung durasi & lokasi</div>
-    </div>
-    <div class="price-card">
-      <div class="price-cat">Cuci Kendaraan & Antar</div>
-      <div class="price-val">NEGO</div>
-      <div class="price-unit">Sesuai jenis & jarak</div>
-    </div>
+    <div class="price-card reveal"><div class="price-cat">Teman & Obrolan</div><div class="price-val">NEGO</div><div class="price-unit">Diskusi dulu yuk!</div></div>
+    <div class="price-card hot reveal"><div class="hot-badge">⚡ Paling Sering Dipesan</div><div class="price-cat">Teman Jalan & Aktivitas</div><div class="price-val">NEGO</div><div class="price-unit">Tergantung durasi & lokasi</div></div>
+    <div class="price-card reveal"><div class="price-cat">Jemput & Antar Barang</div><div class="price-val">NEGO</div><div class="price-unit">Sesuai jenis & jarak</div></div>
   </div>
-  <p class="price-note">💡 Cukup chat di WhatsApp, ceritain kebutuhanmu, dan harga langsung dikasih tahu. Fair, transparan, dan nggak bertele-tele.</p>
+  <p class="price-note reveal">💡 Cukup chat di WhatsApp, ceritain kebutuhanmu, dan harga langsung dikasih tahu. Fair, transparan, dan nggak bertele-tele.</p>
 </section>
 
-<!-- TESTIMONIAL -->
-<section class="testi">
-  <p class="sec-label">Kata Mereka</p>
-  <h2 class="sec-title">Yang Sudah Merasakan BisaKok</h2>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Awalnya ragu, tapi ternyata beneran profesional dan asik banget diajak jalan. Recommended banget!"</div>
-      <div class="testi-name">Rina A.</div>
-      <div class="testi-role">Teman Jalan – Lombok</div>
+<!-- ULASAN -->
+<section class="reviews" id="ulasan">
+  <p class="sec-label reveal">Kata Mereka</p>
+  <h2 class="sec-title reveal">Ulasan Pelanggan</h2>
+  <div class="reviews-grid reveal" id="reviews-grid"></div>
+  <div class="review-form reveal">
+    <div class="review-form-title">⭐ Tulis Ulasan Kamu</div>
+    <div class="star-select" id="star-select">
+      <button class="star-btn" onclick="setStar(1)">★</button>
+      <button class="star-btn" onclick="setStar(2)">★</button>
+      <button class="star-btn" onclick="setStar(3)">★</button>
+      <button class="star-btn" onclick="setStar(4)">★</button>
+      <button class="star-btn" onclick="setStar(5)">★</button>
     </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Harganya wajar dan orangnya ramah. Motor aku dicuci bersih banget. Pasti bakal pesen lagi!"</div>
-      <div class="testi-name">Denny S.</div>
-      <div class="testi-role">Cuci Kendaraan</div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Respon cepet, harga deal dalam 5 menit, dan udah langsung siap. Nggak nyangka semudah ini!"</div>
-      <div class="testi-name">Maya P.</div>
-      <div class="testi-role">Jemput & Antar</div>
-    </div>
+    <input class="form-input" id="rv-nama" type="text" placeholder="Nama kamu"/>
+    <input class="form-input" id="rv-layanan" type="text" placeholder="Layanan yang dipesan"/>
+    <textarea class="form-input" id="rv-teks" rows="3" placeholder="Ceritain pengalamanmu..."></textarea>
+    <button class="submit-review-btn" onclick="submitReview()">Kirim Ulasan</button>
   </div>
 </section>
 
-<!-- CTA BOTTOM -->
-<div class="cta-section">
-  <h2 class="cta-title">Yuk, Langsung Gas!</h2>
-  <p class="cta-sub">Tinggal chat, ceritain kebutuhanmu, dan BisaKok langsung siap action. Nggak perlu ribet, nggak perlu lama.</p>
-  <a class="btn-white" href="https://wa.me/6285143863741?text=Halo%20BisaKok!%20Aku%20mau%20tanya%20soal%20layanan%20kamu" target="_blank">
-    <span class="wa-icon">✓</span>
-    Chat di WhatsApp Sekarang
+<!-- PEMBAYARAN -->
+<section class="payment" id="pembayaran">
+  <p class="sec-label reveal">Pembayaran</p>
+  <h2 class="sec-title reveal">Bayar Lewat DANA</h2>
+  <p class="sec-sub reveal">Setelah deal harga, transfer ke rekening DANA berikut dan kirim bukti pembayaran ke WhatsApp.</p>
+  <div class="dana-card reveal">
+    <div style="font-size:2rem;margin-bottom:8px;">💙</div>
+    <p style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NOMOR DANA</p>
+    <p style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text);letter-spacing:0.04em;">0838-4370-101</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">a.n. <strong>BisaKok</strong></p>
+    <button class="copy-btn" onclick="copyDana()" id="copy-btn">Salin Nomor</button>
+  </div>
+  <a class="wa-pay-btn reveal" href="https://wa.me/6285143863741?text=Halo!%20Saya%20mau%20kirim%20bukti%20pembayaran%20BisaKok." target="_blank">
+    <span class="wa-icon">✓</span> Kirim Bukti Pembayaran ke WA
   </a>
+  <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;line-height:1.6;max-width:380px;margin-left:auto;margin-right:auto;">Kirim bukti transfer beserta nama & layanan yang dipesan. Pesanan dikonfirmasi setelah pembayaran terverifikasi.</p>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-title reveal">Yuk, Langsung Gas!</h2>
+  <p class="cta-sub reveal">Tinggal chat, ceritain kebutuhanmu, dan BisaKok langsung siap action. Nggak perlu ribet, nggak perlu lama.</p>
+  <a class="btn-white reveal" href="https://wa.me/6285143863741?text=Halo!%20Saya%20mau%20tanya%20soal%20layanan%20BisaKok." target="_blank">
+    <span class="wa-icon">✓</span> Chat di WhatsApp Sekarang
+  </a>
+</div>
+
+<!-- SHARE BAR -->
+<div class="share-bar">
+  <div class="share-label">Bagikan ke teman kamu:</div>
+  <div class="share-btns">
+    <button class="share-btn share-wa" onclick="shareWA()">💬 WhatsApp</button>
+    <button class="share-btn share-copy" onclick="shareLink()">🔗 Salin Link</button>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -932,30 +386,252 @@
   <div class="footer-logo">BisaKok</div>
   <div class="footer-text">Jasa Apapun · Harga Nego · Siap Anytime & Anywhere<br>Melayani dengan sepenuh hati — karena BisaKok, emang bisa!</div>
   <div class="footer-wa">📱 <a href="https://wa.me/6285143863741" target="_blank">+62 851-4386-3741</a></div>
-  <div style="margin-top:1.5rem;">
-    <button onclick="openAdmin()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.35);font-size:11px;padding:5px 14px;border-radius:99px;cursor:pointer;font-family:inherit;">🔐 Admin</button>
-  </div>
+  <div class="footer-bottom"><a class="admin-link" href="admin.html">🔐 Admin</a></div>
 </footer>
 
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div style="font-size:2.5rem;margin-bottom:8px;" id="modal-icon">❤️</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--text);" id="modal-title">Pacar Sewaan</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Isi detail pesanan kamu di bawah ini</div>
+    </div>
+    <div class="field-wrap"><label class="field-label">Nama Kamu</label><input class="field-input" id="f-nama" type="text" placeholder="Contoh: Budi"/></div>
+    <div class="field-wrap"><label class="field-label">Hari & Tanggal</label><input class="field-input" id="f-hari" type="date"/></div>
+    <div class="field-wrap"><label class="field-label">Jam Mulai</label><input class="field-input" id="f-jam" type="time"/></div>
+    <div class="field-wrap"><label class="field-label">Durasi</label>
+      <select class="field-input" id="f-durasi">
+        <option value="">-- Pilih durasi --</option>
+        <option>1 jam</option><option>2 jam</option><option>3 jam</option>
+        <option>4 jam</option><option>5 jam</option><option>6 jam</option>
+        <option>Setengah hari (±5 jam)</option><option>Full day (±10 jam)</option>
+      </select>
+    </div>
+    <div class="field-wrap"><label class="field-label">Lokasi / Alamat Jemput</label><input class="field-input" id="f-lokasi" type="text" placeholder="Contoh: Mataram, Lombok"/></div>
+    <div class="field-wrap"><label class="field-label">Catatan <span style="font-weight:400;font-size:11px;">(opsional)</span></label><textarea class="field-input" id="f-catatan" rows="3" placeholder="Ceritain lebih detail..."></textarea></div>
+    <button class="wa-submit-btn" onclick="kirimWA()">
+      <span class="wa-icon">✓</span> Lanjut ke WhatsApp
+    </button>
+    <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:8px;">Pesan akan terkirim otomatis ke WhatsApp BisaKok</p>
+  </div>
+</div>
+
 <script>
-  function copyDana() {
-    var nomor = '08384370101';
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(nomor).then(function() {
-        var btn = document.getElementById('copy-btn');
-        btn.textContent = 'Tersalin!';
-        setTimeout(function() { btn.textContent = 'Salin Nomor'; }, 2000);
-      });
-    } else {
-      var ta = document.createElement('textarea');
-      ta.value = nomor; document.body.appendChild(ta);
-      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-      var btn = document.getElementById('copy-btn');
-      btn.textContent = 'Tersalin!';
-      setTimeout(function() { btn.textContent = 'Salin Nomor'; }, 2000);
+var modalLayanan = '';
+var selectedStar = 0;
+var calYear, calMonth;
+
+/* === DARK MODE === */
+function toggleTheme() {
+  var html = document.documentElement;
+  var dark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('bk_theme', dark ? 'light' : 'dark');
+}
+(function(){
+  var t = localStorage.getItem('bk_theme');
+  if (t === 'dark') { document.documentElement.setAttribute('data-theme','dark'); document.getElementById('theme-btn').textContent = '☀️'; }
+})();
+
+/* === LANGUAGE === */
+var currentLang = 'id';
+var LANG = {
+  id: {
+    hero_title: 'Apapun Tugasnya,<br><span class="accent">BisaKok!</span>',
+    hero_sub: 'Pacar sewaan, teman jalan, ojek personal, atau tugas lainnya? Hubungi aja — harga nego, nggak ribet, langsung beres.',
+    status_available: 'Sekarang Tersedia — Siap Menerima Pesanan',
+    status_busy: 'Sedang Sibuk — Hubungi untuk konfirmasi',
+    nav_available: 'Tersedia', nav_busy: 'Sedang Sibuk',
+  },
+  en: {
+    hero_title: 'Any Task,<br><span class="accent">BisaKok!</span>',
+    hero_sub: 'Rent-a-partner, companion, personal driver, or anything else? Just contact — negotiable price, no hassle, done right away.',
+    status_available: 'Currently Available — Ready to Accept Orders',
+    status_busy: 'Currently Busy — Contact for confirmation',
+    nav_available: 'Available', nav_busy: 'Busy',
+  }
+};
+function toggleLang() {
+  currentLang = currentLang === 'id' ? 'en' : 'id';
+  document.getElementById('lang-btn').textContent = currentLang === 'id' ? 'EN' : 'ID';
+  document.getElementById('hero-title').innerHTML = LANG[currentLang].hero_title;
+  document.getElementById('hero-sub').textContent = LANG[currentLang].hero_sub;
+  updateStatus();
+}
+
+/* === STATUS === */
+function getStatus() { try { return localStorage.getItem('bk_status') || 'available'; } catch(e) { return 'available'; } }
+function updateStatus() {
+  var s = getStatus();
+  var L = LANG[currentLang];
+  var badge = document.getElementById('nav-status');
+  var dot = document.getElementById('hero-dot');
+  badge.className = 'status-badge ' + s;
+  document.getElementById('status-text').textContent = s === 'available' ? L.nav_available : L.nav_busy;
+  document.getElementById('hero-status-label').textContent = s === 'available' ? L.status_available : L.status_busy;
+  if (s === 'available') {
+    dot.style.background = 'var(--green)'; dot.style.animation = 'pulse 1.5s infinite';
+  } else {
+    dot.style.background = 'var(--red)'; dot.style.animation = 'none';
+  }
+}
+updateStatus();
+
+/* === SCROLL REVEAL === */
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+})();
+
+/* === CALENDAR === */
+function getBlockedAll() { try { return JSON.parse(localStorage.getItem('bk_blocked')||'{}'); } catch(e) { return {}; } }
+function isBlockedDate(ds) {
+  var obj = getBlockedAll(); var all = [];
+  Object.keys(obj).forEach(function(k){ all = all.concat(obj[k]||[]); });
+  return all.indexOf(ds) !== -1;
+}
+var MONTHS_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+var DAYS_ID = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+(function(){ var n=new Date(); calYear=n.getFullYear(); calMonth=n.getMonth(); renderCal(); })();
+function renderCal() {
+  document.getElementById('cal-month-label').textContent = MONTHS_ID[calMonth] + ' ' + calYear;
+  var grid = document.getElementById('cal-grid');
+  var html = DAYS_ID.map(function(d){ return '<div class="cal-day-name">'+d+'</div>'; }).join('');
+  var first = new Date(calYear,calMonth,1).getDay();
+  var total = new Date(calYear,calMonth+1,0).getDate();
+  var today = new Date(); today.setHours(0,0,0,0);
+  for(var i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
+  for(var d=1;d<=total;d++){
+    var dt=new Date(calYear,calMonth,d); dt.setHours(0,0,0,0);
+    var ds=calYear+'-'+(calMonth+1<10?'0':'')+(calMonth+1)+'-'+(d<10?'0':'')+d;
+    var cls='cal-day';
+    if(dt<today) cls+=' past';
+    else if(isBlockedDate(ds)) cls+=' blocked';
+    else cls+=' available';
+    if(dt.getTime()===today.getTime()) cls+=' today';
+    html+='<div class="'+cls+'">'+d+'</div>';
+  }
+  grid.innerHTML=html;
+}
+function calPrev(){ calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCal(); }
+function calNext(){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCal(); }
+
+/* === MODAL ORDER === */
+function openModal(nama, icon) {
+  modalLayanan = nama;
+  document.getElementById('modal-icon').textContent = icon;
+  document.getElementById('modal-title').textContent = nama;
+  ['f-nama','f-hari','f-jam','f-lokasi','f-catatan'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('f-durasi').value='';
+  document.getElementById('modal-overlay').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeModal(){ document.getElementById('modal-overlay').style.display='none'; document.body.style.overflow=''; }
+document.addEventListener('change', function(e){
+  if(e.target&&e.target.id==='f-hari'){
+    var v=e.target.value; if(!v) return;
+    var obj=getBlockedAll();
+    var blocked=(obj[modalLayanan]||[]).concat(obj['Semua Layanan']||[]);
+    if(blocked.indexOf(v)!==-1){
+      alert('Maaf, tanggal '+formatTgl(v)+' sudah penuh untuk layanan '+modalLayanan+'. Silakan pilih tanggal lain.');
+      e.target.value='';
     }
   }
-</script>
+});
+function formatTgl(d){
+  if(!d) return '';
+  var o=new Date(d+'T00:00:00');
+  var hr=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][o.getDay()];
+  return hr+', '+o.getDate()+'/'+(o.getMonth()+1)+'/'+o.getFullYear();
+}
+function kirimWA(){
+  var nama=document.getElementById('f-nama').value.trim();
+  var hari=document.getElementById('f-hari').value;
+  var jam=document.getElementById('f-jam').value;
+  var durasi=document.getElementById('f-durasi').value;
+  var lokasi=document.getElementById('f-lokasi').value.trim()||'Tidak disebutkan';
+  var catatan=document.getElementById('f-catatan').value.trim()||'-';
+  if(!nama){showToast('Isi nama dulu ya!');return;}
+  if(!hari||!jam||!durasi){showToast('Hari, jam, dan durasi wajib diisi!');return;}
+  var pesan='Halo '+nama+'!\n\nSaya mau pesan layanan *'+modalLayanan+'*.\n\n*Nama:* '+nama+'\n*Hari & Tanggal:* '+formatTgl(hari)+'\n*Jam Mulai:* '+jam+'\n*Durasi:* '+durasi+'\n*Lokasi:* '+lokasi+'\n*Catatan:* '+catatan+'\n\nMohon konfirmasinya, terima kasih!';
+  window.open('https://wa.me/6285143863741?text='+encodeURIComponent(pesan),'_blank');
+  closeModal();
+}
 
+/* === REVIEWS === */
+var DEFAULT_REVIEWS = [
+  {nama:'Rina A.',layanan:'Teman Jalan – Lombok',bintang:5,teks:'Awalnya ragu, tapi ternyata beneran profesional dan asik banget diajak jalan. Recommended banget!'},
+  {nama:'Denny S.',layanan:'Jemput & Antar',bintang:5,teks:'Respon cepet, harga deal dalam 5 menit, dan udah langsung siap. Nggak nyangka semudah ini!'},
+  {nama:'Maya P.',layanan:'Teman Makan',bintang:5,teks:'Orangnya ramah dan nyambung diajak ngobrol. Makan jadi lebih seru. Pasti bakal pesen lagi!'},
+];
+function getReviews(){ try{ return DEFAULT_REVIEWS.concat(JSON.parse(localStorage.getItem('bk_reviews')||'[]')); }catch(e){ return DEFAULT_REVIEWS; } }
+function renderReviews(){
+  var reviews=getReviews().slice().reverse().slice(0,9);
+  var html=reviews.map(function(r){
+    var stars=''; for(var i=1;i<=5;i++) stars+=i<=r.bintang?'★':'☆';
+    var initials=r.nama.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+    return '<div class="review-card">'+
+      '<div class="review-stars">'+stars+'</div>'+
+      '<div class="review-text">"'+r.teks+'"</div>'+
+      '<div class="review-meta"><div class="review-avatar">'+initials+'</div>'+
+      '<div><div class="review-name">'+r.nama+'</div><div class="review-role">'+r.layanan+'</div></div></div></div>';
+  }).join('');
+  document.getElementById('reviews-grid').innerHTML=html;
+}
+renderReviews();
+function setStar(n){
+  selectedStar=n;
+  document.querySelectorAll('.star-btn').forEach(function(b,i){b.classList.toggle('selected',i<n);});
+}
+function submitReview(){
+  var nama=document.getElementById('rv-nama').value.trim();
+  var layanan=document.getElementById('rv-layanan').value.trim();
+  var teks=document.getElementById('rv-teks').value.trim();
+  if(!nama||!layanan||!teks||!selectedStar){showToast('Lengkapi semua isian & pilih bintang ya!');return;}
+  var saved=[]; try{saved=JSON.parse(localStorage.getItem('bk_reviews')||'[]');}catch(e){}
+  saved.push({nama:nama,layanan:layanan,bintang:selectedStar,teks:teks});
+  localStorage.setItem('bk_reviews',JSON.stringify(saved));
+  document.getElementById('rv-nama').value='';
+  document.getElementById('rv-layanan').value='';
+  document.getElementById('rv-teks').value='';
+  setStar(0); renderReviews();
+  showToast('Ulasan berhasil dikirim! Terima kasih 🙏');
+}
+
+/* === PAYMENT === */
+function copyDana(){
+  var n='08384370101'; var btn=document.getElementById('copy-btn');
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(n).then(function(){btn.textContent='Tersalin ✓';setTimeout(function(){btn.textContent='Salin Nomor';},2000);});
+  } else {
+    var ta=document.createElement('textarea');ta.value=n;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='Tersalin ✓';setTimeout(function(){btn.textContent='Salin Nomor';},2000);
+  }
+}
+
+/* === SHARE === */
+function shareWA(){
+  var txt='Cek layanan BisaKok — jasa apapun asal ada budget-nya! '+window.location.href;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+function shareLink(){
+  if(navigator.clipboard){navigator.clipboard.writeText(window.location.href).then(function(){showToast('Link tersalin!');});}
+  else showToast('Salin link dari address bar ya!');
+}
+
+/* === TOAST === */
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2400);
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+</script>
 </body>
 </html>
