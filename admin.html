@@ -8,107 +8,151 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --orange:#FF6B1A;--orange-dark:#e05500;--orange-pale:#FFF0E8;
-  --dark:#1C0A00;--white:#FFFFFF;--gray:#F7F4F2;--gray2:#EDE9E5;
-  --text:#1C0A00;--text-muted:#7A5C4A;--border:rgba(255,107,26,0.15);
-  --card:#FFFFFF;--green:#16a34a;--green-pale:#f0fdf4;
-  --red:#dc2626;--red-pale:#fef2f2;--blue:#2563eb;--blue-pale:#eff6ff;
+  --orange:#FF6B1A;--od:#e05500;--op:#FFF0E8;
+  --dark:#1C0A00;--white:#fff;--gray:#F7F4F2;--gray2:#EDE9E5;
+  --text:#1C0A00;--muted:#7A5C4A;--border:rgba(255,107,26,0.15);
+  --card:#fff;--green:#16a34a;--gp:#f0fdf4;--red:#dc2626;--rp:#fef2f2;--blue:#2563eb;--bp:#eff6ff;
 }
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--gray);color:var(--text);min-height:100vh;}
 
 /* LOGIN */
-#login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:linear-gradient(135deg,#fff8f4,#ffe0c8);}
-.login-card{background:#fff;border-radius:24px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 8px 40px rgba(255,107,26,0.12);text-align:center;}
-.login-logo{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);margin-bottom:4px;}
-.login-logo span{color:var(--dark);}
-.login-sub{font-size:13px;color:var(--text-muted);margin-bottom:2rem;}
-.login-input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;font-family:inherit;outline:none;margin-bottom:14px;transition:border-color 0.15s;}
-.login-input:focus{border-color:var(--orange);}
-.login-btn{width:100%;background:var(--orange);color:#fff;font-weight:800;font-size:15px;padding:13px;border-radius:99px;border:none;cursor:pointer;transition:background 0.15s;}
-.login-btn:hover{background:var(--orange-dark);}
-.login-err{font-size:12px;color:var(--red);margin-bottom:12px;min-height:16px;}
+#lp{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:linear-gradient(135deg,#fff8f4,#ffe0c8);}
+.lc{background:#fff;border-radius:24px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 8px 40px rgba(255,107,26,0.12);text-align:center;}
+.ll{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);}
+.ll span{color:var(--dark);}
+.ls{font-size:13px;color:var(--muted);margin-bottom:2rem;}
+.li{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;font-family:inherit;outline:none;margin-bottom:14px;transition:border-color 0.15s;}
+.li:focus{border-color:var(--orange);}
+.lb{width:100%;background:var(--orange);color:#fff;font-weight:800;font-size:15px;padding:13px;border-radius:99px;border:none;cursor:pointer;}
+.lb:hover{background:var(--od);}
+.le{font-size:12px;color:var(--red);margin-bottom:12px;min-height:16px;}
 
-/* DASHBOARD */
-#dashboard{display:none;}
-.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
-.topbar-logo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--orange);}
-.topbar-logo span{color:var(--dark);}
-.topbar-right{display:flex;align-items:center;gap:8px;}
-.badge-admin{background:var(--orange-pale);color:var(--orange-dark);font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;border:1px solid var(--border);}
-.topbar-btn{background:var(--gray);border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;color:var(--text-muted);cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;}
-.topbar-btn:hover{background:var(--gray2);}
+/* TOPBAR */
+#dash{display:none;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.tl{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--orange);}
+.tl span{color:var(--dark);}
+.tr{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.tbtn{background:var(--gray);border:none;border-radius:10px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:background 0.15s;}
+.tbtn:hover{background:var(--gray2);}
+.tbtn.danger{background:var(--rp);color:var(--red);}
+.badge{background:var(--op);color:var(--od);font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;border:1px solid var(--border);}
 
-.body-wrap{padding:1.5rem;max-width:820px;margin:0 auto;}
+/* SIDEBAR + BODY LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 60px);}
+.sidebar{width:200px;background:#fff;border-right:1px solid var(--border);padding:1rem 0;flex-shrink:0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 1.25rem;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all 0.15s;border:none;background:none;width:100%;font-family:inherit;text-align:left;}
+.nav-item:hover{background:var(--gray);color:var(--text);}
+.nav-item.active{color:var(--orange);background:var(--op);border-left:3px solid var(--orange);}
+.nav-icon{font-size:16px;width:20px;text-align:center;}
+.nav-sep{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:0.1em;padding:12px 1.25rem 4px;text-transform:uppercase;opacity:0.6;}
 
-/* TABS */
-.tabs{display:flex;gap:4px;background:var(--gray2);border-radius:14px;padding:4px;margin-bottom:1.5rem;flex-wrap:wrap;}
-.tab{flex:1;min-width:100px;padding:9px 14px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text-muted);background:transparent;transition:all 0.15s;text-align:center;}
-.tab.active{background:#fff;color:var(--orange);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.main{flex:1;padding:1.5rem;overflow:auto;max-width:760px;}
 
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+/* TAB PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
 
 /* CARDS */
 .card{background:var(--card);border-radius:16px;padding:1.25rem;border:1px solid var(--border);margin-bottom:1rem;}
-.card-title{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;display:block;}
+.card-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;display:block;}
+.card-title2{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:8px;}
 
-/* STATS GRID */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1rem;}
-.stat-card{background:var(--card);border-radius:14px;padding:1rem;border:1px solid var(--border);text-align:center;}
-.stat-card-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange);}
-.stat-card-label{font-size:11px;color:var(--text-muted);margin-top:4px;font-weight:600;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1rem;}
+.sc{background:var(--card);border-radius:14px;padding:1rem;border:1px solid var(--border);text-align:center;}
+.sc-num{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--orange);}
+.sc-label{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;}
 
-/* STATUS TOGGLE */
-.status-toggle-wrap{display:flex;gap:10px;flex-wrap:wrap;}
-.status-opt{flex:1;min-width:130px;padding:14px;border-radius:14px;border:2px solid var(--border);text-align:center;cursor:pointer;transition:all 0.15s;}
-.status-opt.selected-available{border-color:var(--green);background:var(--green-pale);}
-.status-opt.selected-busy{border-color:var(--red);background:var(--red-pale);}
-.status-opt-icon{font-size:1.5rem;margin-bottom:6px;display:block;}
-.status-opt-label{font-size:13px;font-weight:700;color:var(--text);}
-.status-opt-desc{font-size:11px;color:var(--text-muted);margin-top:2px;}
-
-/* KAT TABS */
-.kat-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
-.kat-tab{padding:6px 12px;border-radius:99px;border:1.5px solid var(--border);font-size:12px;font-weight:700;cursor:pointer;background:#fff;color:var(--text-muted);transition:all 0.15s;font-family:inherit;}
-.kat-tab.active{background:var(--orange);color:#fff;border-color:var(--orange);}
-
-/* FORM ROW */
-.form-row{display:flex;gap:8px;flex-wrap:wrap;}
-.form-row input{flex:1;min-width:140px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);font-size:13px;font-family:inherit;outline:none;background:#fff;transition:border-color 0.15s;}
-.form-row input:focus{border-color:var(--orange);}
-.btn-orange{background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
-.btn-orange:hover{background:var(--orange-dark);}
+/* FORMS */
+.field{margin-bottom:12px;}
+.label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:5px;}
+.inp{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);font-size:13px;font-family:inherit;outline:none;background:#fff;color:var(--text);transition:border-color 0.15s;}
+.inp:focus{border-color:var(--orange);}
+.row{display:flex;gap:8px;flex-wrap:wrap;}
+.row .inp{flex:1;min-width:120px;}
+.btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:800;font-family:inherit;transition:all 0.15s;}
+.btn-o{background:var(--orange);color:#fff;}.btn-o:hover{background:var(--od);}
+.btn-g{background:var(--gp);color:var(--green);}.btn-g:hover{opacity:0.85;}
+.btn-r{background:var(--rp);color:var(--red);}.btn-r:hover{opacity:0.85;}
+.btn-b{background:var(--bp);color:var(--blue);}.btn-b:hover{opacity:0.85;}
+.btn-gray{background:var(--gray2);color:var(--muted);}
+.btn-full{width:100%;}
 
 /* LIST ITEMS */
-.list-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray);border-radius:10px;margin-bottom:8px;gap:8px;}
-.list-item-left{display:flex;flex-direction:column;gap:2px;flex:1;}
-.list-item-main{font-size:13px;font-weight:700;color:var(--dark);}
-.list-item-sub{font-size:11px;color:var(--text-muted);}
-.btn-red{background:var(--red-pale);color:var(--red);border:none;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0;}
-.btn-red:hover{background:#fecaca;}
-.empty{text-align:center;padding:2rem 1rem;font-size:13px;color:var(--text-muted);line-height:1.6;}
+.li-item{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 12px;background:var(--gray);border-radius:10px;margin-bottom:8px;gap:8px;}
+.li-left{flex:1;display:flex;flex-direction:column;gap:2px;}
+.li-main{font-size:13px;font-weight:700;color:var(--dark);}
+.li-sub{font-size:11px;color:var(--muted);}
+.li-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
 
 /* REVIEW ITEM */
-.review-item{background:var(--gray);border-radius:12px;padding:1rem;margin-bottom:10px;}
-.review-item-stars{color:var(--orange);font-size:12px;margin-bottom:4px;}
-.review-item-text{font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;font-style:italic;}
-.review-item-meta{font-size:11px;color:var(--text-muted);}
-.review-item-actions{display:flex;gap:6px;margin-top:8px;}
-.btn-del{background:var(--red-pale);color:var(--red);border:none;border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;}
+.rv-item{background:var(--gray);border-radius:14px;padding:1rem;margin-bottom:10px;}
+.rv-stars{color:var(--orange);font-size:13px;margin-bottom:5px;}
+.rv-text{font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;font-style:italic;}
+.rv-meta{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.rv-reply{background:var(--op);border-radius:10px;padding:10px 12px;border-left:3px solid var(--orange);margin-bottom:8px;}
+.rv-reply-label{font-size:10px;font-weight:700;color:var(--orange);margin-bottom:4px;}
+.rv-reply-text{font-size:12px;color:var(--text);line-height:1.5;}
+.rv-reply-form{display:flex;gap:8px;margin-top:6px;}
+.rv-reply-form textarea{flex:1;padding:8px 10px;border-radius:10px;border:1.5px solid var(--border);font-size:12px;font-family:inherit;outline:none;resize:none;min-height:60px;}
+.rv-reply-form textarea:focus{border-color:var(--orange);}
+
+/* STATUS OPTS */
+.so-wrap{display:flex;gap:10px;flex-wrap:wrap;}
+.so{flex:1;min-width:120px;padding:14px;border-radius:14px;border:2px solid var(--border);text-align:center;cursor:pointer;transition:all 0.15s;}
+.so.sel-available{border-color:var(--green);background:var(--gp);}
+.so.sel-busy{border-color:var(--red);background:var(--rp);}
+.so-icon{font-size:1.5rem;margin-bottom:6px;display:block;}
+.so-label{font-size:13px;font-weight:700;color:var(--text);}
+.so-desc{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* KAT TABS */
+.kt{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
+.kt-btn{padding:6px 12px;border-radius:99px;border:1.5px solid var(--border);font-size:12px;font-weight:700;cursor:pointer;background:#fff;color:var(--muted);font-family:inherit;transition:all 0.15s;}
+.kt-btn.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* TOGGLE SWITCH */
+.toggle-wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 0;}
+.toggle-label{font-size:13px;font-weight:600;color:var(--text);}
+.toggle-desc{font-size:11px;color:var(--muted);}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--gray2);border-radius:99px;cursor:pointer;transition:background 0.2s;}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform 0.2s;}
+.toggle input:checked+.toggle-slider{background:var(--orange);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(20px);}
+
+/* PROMO BANNER PREVIEW */
+.promo-preview{border-radius:14px;padding:14px 18px;margin-bottom:12px;font-weight:700;font-size:14px;color:#fff;position:relative;}
+
+/* CHART BAR */
+.chart-bar-wrap{margin-bottom:8px;}
+.chart-bar-label{font-size:12px;color:var(--text);margin-bottom:4px;display:flex;justify-content:space-between;}
+.chart-bar-track{background:var(--gray2);border-radius:99px;height:10px;overflow:hidden;}
+.chart-bar-fill{height:100%;border-radius:99px;background:var(--orange);transition:width 0.5s ease;}
 
 /* INFO BOX */
-.info-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:12px 16px;font-size:12px;color:#92400e;margin-bottom:1rem;line-height:1.6;}
+.info{background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:12px 16px;font-size:12px;color:#92400e;margin-bottom:1rem;line-height:1.6;}
+.info-green{background:var(--gp);border:1px solid rgba(22,163,74,0.2);border-radius:12px;padding:12px 16px;font-size:12px;color:var(--green);margin-bottom:1rem;line-height:1.6;}
 
 /* TOAST */
 #toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;font-size:13px;font-weight:600;padding:10px 22px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity 0.3s;white-space:nowrap;z-index:9999;}
 #toast.show{opacity:1;}
 
-@media(max-width:500px){
-  .body-wrap{padding:1rem;}
-  .form-row{flex-direction:column;}
-  .form-row input,.btn-orange{width:100%;}
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
-  .tab{font-size:11px;padding:8px 10px;}
+/* EMPTY */
+.empty{text-align:center;padding:2rem 1rem;font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border);margin:12px 0;}
+
+@media(max-width:600px){
+  .sidebar{display:none;}
+  .main{padding:1rem;}
+  .sg{grid-template-columns:repeat(2,1fr);}
+  .row{flex-direction:column;}
+  .row .inp,.btn{width:100%;}
+  .so-wrap{flex-direction:column;}
 }
 </style>
 </head>
@@ -116,263 +160,647 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--gray);color:var
 <div id="toast"></div>
 
 <!-- LOGIN -->
-<div id="login-page">
-  <div class="login-card">
-    <div class="login-logo">Bisa<span>Kok</span></div>
-    <p class="login-sub">Panel Admin — khusus pengelola</p>
-    <input class="login-input" id="pass-input" type="password" placeholder="Masukkan password admin..." onkeydown="if(event.key==='Enter')doLogin()"/>
-    <p class="login-err" id="login-err"></p>
-    <button class="login-btn" onclick="doLogin()">Masuk ke Panel Admin</button>
+<div id="lp">
+  <div class="lc">
+    <div class="ll">Bisa<span>Kok</span></div>
+    <p class="ls">Panel Admin — khusus pengelola</p>
+    <input class="li" id="pi" type="password" placeholder="Password admin..." onkeydown="if(event.key==='Enter')login()"/>
+    <p class="le" id="le"></p>
+    <button class="lb" onclick="login()">Masuk ke Panel Admin</button>
   </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard">
+<div id="dash">
   <div class="topbar">
-    <div class="topbar-logo">Bisa<span>Kok</span> <span style="font-size:11px;font-weight:600;color:var(--text-muted);">Admin</span></div>
-    <div class="topbar-right">
-      <span class="badge-admin">Admin</span>
-      <a class="topbar-btn" href="index.html" target="_blank">🌐 Lihat Web</a>
-      <button class="topbar-btn" onclick="doLogout()">Keluar</button>
+    <div class="tl">Bisa<span>Kok</span> <span style="font-size:11px;font-weight:600;color:var(--muted);">Admin</span></div>
+    <div class="tr">
+      <span class="badge" id="status-badge-top">🟢 Tersedia</span>
+      <a class="tbtn" href="index.html" target="_blank">🌐 Lihat Web</a>
+      <button class="tbtn danger" onclick="logout()">Keluar</button>
     </div>
   </div>
 
-  <div class="body-wrap">
-
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('statistik')">📊 Statistik</button>
-      <button class="tab" onclick="switchTab('status')">🟢 Status</button>
-      <button class="tab" onclick="switchTab('jadwal')">📅 Jadwal</button>
-      <button class="tab" onclick="switchTab('ulasan')">⭐ Ulasan</button>
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="nav-sep">Dashboard</div>
+      <button class="nav-item active" onclick="go('statistik')"><span class="nav-icon">📊</span>Statistik</button>
+      <button class="nav-item" onclick="go('status')"><span class="nav-icon">🟢</span>Status</button>
+      <div class="nav-sep">Konten</div>
+      <button class="nav-item" onclick="go('ulasan')"><span class="nav-icon">⭐</span>Ulasan</button>
+      <button class="nav-item" onclick="go('pengumuman')"><span class="nav-icon">📢</span>Pengumuman</button>
+      <button class="nav-item" onclick="go('promo')"><span class="nav-icon">🎁</span>Promo Banner</button>
+      <button class="nav-item" onclick="go('faq')"><span class="nav-icon">❓</span>FAQ</button>
+      <div class="nav-sep">Jadwal</div>
+      <button class="nav-item" onclick="go('jadwal')"><span class="nav-icon">📅</span>Blokir Tanggal</button>
+      <div class="nav-sep">Sistem</div>
+      <button class="nav-item" onclick="go('pengaturan')"><span class="nav-icon">⚙️</span>Pengaturan</button>
+      <button class="nav-item" onclick="go('backup')"><span class="nav-icon">💾</span>Backup Data</button>
     </div>
 
-    <!-- TAB: STATISTIK -->
-    <div class="tab-content active" id="tab-statistik">
-      <div class="stats-grid" id="stats-grid"></div>
-      <div class="card">
-        <span class="card-title">Layanan Terpopuler (dari ulasan)</span>
-        <div id="popular-list"></div>
-      </div>
-      <div class="card">
-        <span class="card-title">Ulasan Terbaru</span>
-        <div id="recent-reviews"></div>
-      </div>
-    </div>
+    <!-- MAIN CONTENT -->
+    <div class="main">
 
-    <!-- TAB: STATUS -->
-    <div class="tab-content" id="tab-status">
-      <div class="card">
-        <span class="card-title">Status Ketersediaan Sekarang</span>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;line-height:1.6;">Status ini tampil di halaman utama web — pengunjung bisa langsung tahu apakah kamu sedang tersedia atau tidak.</p>
-        <div class="status-toggle-wrap" id="status-toggle"></div>
-      </div>
-      <div class="info-box">Perubahan status langsung terlihat di halaman web utama setelah pengunjung refresh halaman.</div>
-    </div>
-
-    <!-- TAB: JADWAL -->
-    <div class="tab-content" id="tab-jadwal">
-      <div class="info-box">Tanggal yang diblokir tidak bisa dipilih oleh pemesan saat memesan layanan tertentu. Kamu bisa blokir per kategori layanan atau untuk semua layanan sekaligus.</div>
-      <div class="card">
-        <span class="card-title">Pilih Kategori Layanan</span>
-        <div class="kat-tabs" id="kat-tabs"></div>
-        <span class="card-title" style="margin-top:1rem;">Blokir Tanggal Baru untuk: <strong id="kat-active-label" style="color:var(--orange);">Semua Layanan</strong></span>
-        <div class="form-row">
-          <input type="date" id="new-date"/>
-          <button class="btn-orange" onclick="addBlock()">+ Blokir Tanggal</button>
+      <!-- ======== STATISTIK ======== -->
+      <div class="panel active" id="p-statistik">
+        <div class="card-title2">📊 Statistik & Ringkasan</div>
+        <div class="sg" id="sg"></div>
+        <div class="card">
+          <span class="card-title">Distribusi Rating</span>
+          <div id="rating-chart"></div>
+        </div>
+        <div class="card">
+          <span class="card-title">Layanan Terpopuler</span>
+          <div id="popular-list"></div>
+        </div>
+        <div class="card">
+          <span class="card-title">Ulasan Terbaru</span>
+          <div id="recent-rv"></div>
         </div>
       </div>
-      <div class="card">
-        <span class="card-title">Tanggal yang Diblokir</span>
-        <div id="blocked-list"></div>
-      </div>
-    </div>
 
-    <!-- TAB: ULASAN -->
-    <div class="tab-content" id="tab-ulasan">
-      <div class="card">
-        <span class="card-title">Semua Ulasan Pelanggan</span>
-        <div id="all-reviews"></div>
+      <!-- ======== STATUS ======== -->
+      <div class="panel" id="p-status">
+        <div class="card-title2">🟢 Status Ketersediaan</div>
+        <div class="card">
+          <span class="card-title">Status Sekarang</span>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Status tampil di navbar dan hero web utama. Pengunjung langsung tahu apakah kamu tersedia atau tidak.</p>
+          <div class="so-wrap" id="so-wrap"></div>
+        </div>
+        <div class="card">
+          <span class="card-title">Pesan Status Kustom</span>
+          <div class="field">
+            <label class="label">Teks status tersedia</label>
+            <input class="inp" id="msg-available" type="text" placeholder="Sekarang Tersedia — Siap Menerima Pesanan"/>
+          </div>
+          <div class="field">
+            <label class="label">Teks status sibuk</label>
+            <input class="inp" id="msg-busy" type="text" placeholder="Sedang Sibuk — Hubungi untuk konfirmasi"/>
+          </div>
+          <button class="btn btn-o" onclick="saveStatusMsg()">Simpan Pesan Status</button>
+        </div>
+        <div class="info">Perubahan status terlihat di halaman utama setelah pengunjung refresh halaman.</div>
       </div>
-    </div>
 
-  </div>
-</div>
+      <!-- ======== ULASAN ======== -->
+      <div class="panel" id="p-ulasan">
+        <div class="card-title2">⭐ Kelola Ulasan & Balas Komentar</div>
+        <div class="info-green">Klik "Balas" di setiap ulasan untuk membalas — balasan akan tampil langsung di web utama di bawah ulasan tersebut.</div>
+        <div id="all-rv"></div>
+      </div>
+
+      <!-- ======== PENGUMUMAN ======== -->
+      <div class="panel" id="p-pengumuman">
+        <div class="card-title2">📢 Pengumuman</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Pengumuman akan tampil sebagai banner di bagian atas halaman web utama. Berguna untuk info libur, promo, atau pemberitahuan penting.</p>
+        <div class="card">
+          <span class="card-title">Pengumuman Aktif</span>
+          <div class="toggle-wrap">
+            <div><div class="toggle-label">Tampilkan Pengumuman</div><div class="toggle-desc">Aktifkan agar pengumuman tampil di web</div></div>
+            <label class="toggle"><input type="checkbox" id="ann-active" onchange="saveAnn()"/><span class="toggle-slider"></span></label>
+          </div>
+          <hr class="divider"/>
+          <div class="field"><label class="label">Teks Pengumuman</label><textarea class="inp" id="ann-text" rows="3" placeholder="Contoh: Libur Lebaran 5-7 April. Pesanan dibuka kembali 8 April." oninput="saveAnn()"></textarea></div>
+          <div class="field">
+            <label class="label">Warna Background</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn" style="background:#FF6B1A;color:#fff;" onclick="setAnnColor('#FF6B1A')">Oranye</button>
+              <button class="btn" style="background:#16a34a;color:#fff;" onclick="setAnnColor('#16a34a')">Hijau</button>
+              <button class="btn" style="background:#2563eb;color:#fff;" onclick="setAnnColor('#2563eb')">Biru</button>
+              <button class="btn" style="background:#dc2626;color:#fff;" onclick="setAnnColor('#dc2626')">Merah</button>
+              <button class="btn" style="background:#7c3aed;color:#fff;" onclick="setAnnColor('#7c3aed')">Ungu</button>
+            </div>
+          </div>
+          <div class="field"><label class="label">Preview</label><div class="promo-preview" id="ann-preview">Pengumuman kamu akan tampil di sini...</div></div>
+        </div>
+      </div>
+
+      <!-- ======== PROMO BANNER ======== -->
+      <div class="panel" id="p-promo">
+        <div class="card-title2">🎁 Promo Banner</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Banner promo tampil di section hero web utama di bawah tombol pesan. Cocok untuk promosi spesial atau diskon.</p>
+        <div class="card">
+          <div class="toggle-wrap">
+            <div><div class="toggle-label">Tampilkan Banner Promo</div><div class="toggle-desc">Aktifkan agar promo tampil di web</div></div>
+            <label class="toggle"><input type="checkbox" id="promo-active" onchange="savePromo()"/><span class="toggle-slider"></span></label>
+          </div>
+          <hr class="divider"/>
+          <div class="field"><label class="label">Teks Promo</label><input class="inp" id="promo-text" type="text" placeholder="🎉 Promo akhir bulan! Diskon 20% untuk Teman Jalan" oninput="savePromo()"/></div>
+          <div class="field"><label class="label">Sub-teks (opsional)</label><input class="inp" id="promo-sub" type="text" placeholder="Berlaku hingga 30 April 2026" oninput="savePromo()"/></div>
+          <div class="field">
+            <label class="label">Warna</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn" style="background:#FF6B1A;color:#fff;" onclick="setPromoColor('#FF6B1A','#ff8c00')">Oranye</button>
+              <button class="btn" style="background:#16a34a;color:#fff;" onclick="setPromoColor('#16a34a','#15803d')">Hijau</button>
+              <button class="btn" style="background:#2563eb;color:#fff;" onclick="setPromoColor('#2563eb','#1d4ed8')">Biru</button>
+              <button class="btn" style="background:#7c3aed;color:#fff;" onclick="setPromoColor('#7c3aed','#6d28d9')">Ungu</button>
+            </div>
+          </div>
+          <div class="field"><label class="label">Preview</label><div class="promo-preview" id="promo-preview" style="background:linear-gradient(135deg,#FF6B1A,#ff8c00);">Preview promo akan muncul di sini</div></div>
+        </div>
+      </div>
+
+      <!-- ======== FAQ ======== -->
+      <div class="panel" id="p-faq">
+        <div class="card-title2">❓ Kelola FAQ</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">FAQ tampil di halaman web utama sebagai accordion. Bantu calon pemesan menemukan jawaban sebelum hubungi kamu.</p>
+        <div class="card">
+          <span class="card-title">Tambah FAQ Baru</span>
+          <div class="field"><label class="label">Pertanyaan</label><input class="inp" id="faq-q" type="text" placeholder="Contoh: Apakah bisa memesan di hari yang sama?"/></div>
+          <div class="field"><label class="label">Jawaban</label><textarea class="inp" id="faq-a" rows="3" placeholder="Contoh: Bisa, selama jadwal masih tersedia. Hubungi via WA untuk konfirmasi cepat."></textarea></div>
+          <button class="btn btn-o" onclick="addFaq()">+ Tambah FAQ</button>
+        </div>
+        <div class="card">
+          <span class="card-title">Daftar FAQ</span>
+          <div id="faq-list"></div>
+        </div>
+      </div>
+
+      <!-- ======== JADWAL ======== -->
+      <div class="panel" id="p-jadwal">
+        <div class="card-title2">📅 Blokir Tanggal</div>
+        <div class="info">Tanggal yang diblokir tidak bisa dipilih pemesan saat pesan layanan tersebut. Blokir per kategori atau semua sekaligus.</div>
+        <div class="card">
+          <span class="card-title">Pilih Kategori</span>
+          <div class="kt" id="kt"></div>
+          <span class="card-title" style="margin-top:1rem;">Blokir untuk: <strong id="kat-label" style="color:var(--orange);">Semua Layanan</strong></span>
+          <div class="row">
+            <input type="date" class="inp" id="new-date"/>
+            <button class="btn btn-o" onclick="addBlock()">+ Blokir</button>
+          </div>
+        </div>
+        <div class="card">
+          <span class="card-title">Tanggal Diblokir</span>
+          <div id="blocked-list"></div>
+        </div>
+      </div>
+
+      <!-- ======== PENGATURAN ======== -->
+      <div class="panel" id="p-pengaturan">
+        <div class="card-title2">⚙️ Pengaturan Web</div>
+        <div class="card">
+          <span class="card-title">Informasi Kontak</span>
+          <div class="field"><label class="label">Nomor WhatsApp</label><input class="inp" id="set-wa" type="text" placeholder="6285143863741"/></div>
+          <div class="field"><label class="label">Nomor DANA</label><input class="inp" id="set-dana" type="text" placeholder="08384370101"/></div>
+          <div class="field"><label class="label">Nama Brand</label><input class="inp" id="set-brand" type="text" placeholder="BisaKok"/></div>
+          <button class="btn btn-o" onclick="saveSettings()">Simpan Pengaturan</button>
+        </div>
+        <div class="card">
+          <span class="card-title">Fitur Web</span>
+          <div class="toggle-wrap">
+            <div><div class="toggle-label">Tampilkan Form Ulasan</div><div class="toggle-desc">Pengunjung bisa menulis ulasan</div></div>
+            <label class="toggle"><input type="checkbox" id="feat-review" onchange="saveFeat()" checked/><span class="toggle-slider"></span></label>
+          </div>
+          <hr class="divider"/>
+          <div class="toggle-wrap">
+            <div><div class="toggle-label">Tampilkan Section FAQ</div><div class="toggle-desc">FAQ tampil di halaman utama</div></div>
+            <label class="toggle"><input type="checkbox" id="feat-faq" onchange="saveFeat()"/><span class="toggle-slider"></span></label>
+          </div>
+          <hr class="divider"/>
+          <div class="toggle-wrap">
+            <div><div class="toggle-label">Mode Maintenance</div><div class="toggle-desc">Web tampilkan halaman "sedang dalam perbaikan"</div></div>
+            <label class="toggle"><input type="checkbox" id="feat-maintenance" onchange="saveFeat()"/><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="card">
+          <span class="card-title">Ganti Password Admin</span>
+          <div class="field"><label class="label">Password Baru</label><input class="inp" id="new-pass" type="password" placeholder="Password baru..."/></div>
+          <div class="field"><label class="label">Konfirmasi Password</label><input class="inp" id="confirm-pass" type="password" placeholder="Ulangi password baru..."/></div>
+          <button class="btn btn-o" onclick="changePass()">Ganti Password</button>
+          <p style="font-size:11px;color:var(--muted);margin-top:8px;">⚠️ Catat password baru sebelum disimpan. Tersimpan di browser ini.</p>
+        </div>
+      </div>
+
+      <!-- ======== BACKUP ======== -->
+      <div class="panel" id="p-backup">
+        <div class="card-title2">💾 Backup & Restore Data</div>
+        <div class="info">Semua data tersimpan di browser ini. Gunakan fitur backup untuk menyimpan salinan data dan restore jika diperlukan.</div>
+        <div class="card">
+          <span class="card-title">Export / Download Data</span>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Download semua data (ulasan, blokir tanggal, FAQ, pengaturan) sebagai file JSON. Simpan sebagai cadangan.</p>
+          <button class="btn btn-o" onclick="exportData()">📥 Download Backup (JSON)</button>
+        </div>
+        <div class="card">
+          <span class="card-title">Import / Restore Data</span>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Upload file backup JSON untuk mengembalikan data. <strong>Peringatan: data yang ada akan ditimpa!</strong></p>
+          <input type="file" id="import-file" accept=".json" style="margin-bottom:10px;font-size:13px;"/>
+          <br/>
+          <button class="btn btn-b" onclick="importData()">📤 Restore dari File</button>
+        </div>
+        <div class="card">
+          <span class="card-title">Reset Data</span>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Hapus semua data yang tersimpan di browser. Tindakan ini tidak dapat dibatalkan!</p>
+          <button class="btn btn-r" onclick="resetData()">🗑️ Reset Semua Data</button>
+        </div>
+        <div class="card">
+          <span class="card-title">Info Penyimpanan</span>
+          <div id="storage-info"></div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /dash -->
 
 <script>
-var PASS = 'Bisakok499';
-var activeKat = 'Semua Layanan';
-var KATEGORI = [
-  'Semua Layanan','Pacar Sewaan','Teman Jalan','Teman Makan',
-  'Teman Ngobrol','Jemput & Antar','Teman Main / Nongkrong',
-  'Titip & Antar Barang','Request Lainnya'
-];
+/* ====== CONFIG ====== */
+var PASS_KEY = 'bk_admin_pass';
+var getPass = function(){ return localStorage.getItem(PASS_KEY) || 'Bisakok499'; };
+
+var KATEGORI = ['Semua Layanan','Pacar Sewaan','Teman Jalan','Teman Makan','Teman Ngobrol','Jemput & Antar','Teman Main / Nongkrong','Titip & Antar Barang','Request Lainnya'];
 var ICONS = {'Semua Layanan':'🔒','Pacar Sewaan':'❤️','Teman Jalan':'🚶','Teman Makan':'🍜','Teman Ngobrol':'💬','Jemput & Antar':'🚗','Teman Main / Nongkrong':'🎮','Titip & Antar Barang':'📦','Request Lainnya':'✨'};
+var activeKat = 'Semua Layanan';
+
 var DEFAULT_REVIEWS = [
-  {nama:'Rina A.',layanan:'Teman Jalan – Lombok',bintang:5,teks:'Awalnya ragu, tapi ternyata beneran profesional dan asik banget diajak jalan. Recommended banget!'},
-  {nama:'Denny S.',layanan:'Jemput & Antar',bintang:5,teks:'Respon cepet, harga deal dalam 5 menit, dan udah langsung siap. Nggak nyangka semudah ini!'},
-  {nama:'Maya P.',layanan:'Teman Makan',bintang:5,teks:'Orangnya ramah dan nyambung diajak ngobrol. Makan jadi lebih seru. Pasti bakal pesen lagi!'},
+  {nama:'Rina A.',layanan:'Teman Jalan – Lombok',bintang:5,teks:'Awalnya ragu, tapi ternyata beneran profesional dan asik banget diajak jalan. Recommended banget!',def:true},
+  {nama:'Denny S.',layanan:'Jemput & Antar',bintang:5,teks:'Respon cepet, harga deal dalam 5 menit, dan udah langsung siap. Nggak nyangka semudah ini!',def:true},
+  {nama:'Maya P.',layanan:'Teman Makan',bintang:5,teks:'Orangnya ramah dan nyambung diajak ngobrol. Makan jadi lebih seru. Pasti bakal pesen lagi!',def:true},
 ];
 
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
+/* ====== HELPERS ====== */
+function T(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
+function ls(k){ try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;} }
+function ss(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+function formatTgl(d){ if(!d) return ''; var o=new Date(d+'T00:00:00'); return ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][o.getDay()]+', '+o.getDate()+'/'+(o.getMonth()+1)+'/'+o.getFullYear(); }
+function starsHtml(n){ var s=''; for(var i=1;i<=5;i++) s+=i<=n?'★':'☆'; return s; }
+function replyKey(r){ return r.nama+'|'+r.teks.slice(0,20); }
 
-function doLogin(){
-  var p=document.getElementById('pass-input').value;
-  if(p===PASS){
-    document.getElementById('login-page').style.display='none';
-    document.getElementById('dashboard').style.display='block';
-    renderAll();
+/* ====== AUTH ====== */
+function login(){
+  var p=document.getElementById('pi').value;
+  if(p===getPass()){
+    document.getElementById('lp').style.display='none';
+    document.getElementById('dash').style.display='block';
+    initAll();
   } else {
-    document.getElementById('login-err').textContent='Password salah. Coba lagi.';
-    document.getElementById('pass-input').value='';
+    document.getElementById('le').textContent='Password salah. Coba lagi.';
+    document.getElementById('pi').value='';
   }
 }
-function doLogout(){document.getElementById('login-page').style.display='flex';document.getElementById('dashboard').style.display='none';document.getElementById('pass-input').value='';document.getElementById('login-err').textContent='';}
-document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('login-page').style.display!=='none')doLogin();});
-
-function switchTab(name){
-  document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',['statistik','status','jadwal','ulasan'][i]===name);});
-  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
-  document.getElementById('tab-'+name).classList.add('active');
+function logout(){
+  document.getElementById('lp').style.display='flex';
+  document.getElementById('dash').style.display='none';
+  document.getElementById('pi').value='';
+  document.getElementById('le').textContent='';
 }
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('lp').style.display!=='none')login();});
 
-function renderAll(){ renderStats(); renderStatus(); renderKatTabs(); renderBlocked(); renderAdminReviews(); }
-
-/* STATS */
-function getAllReviews(){ try{return DEFAULT_REVIEWS.concat(JSON.parse(localStorage.getItem('bk_reviews')||'[]'));}catch(e){return DEFAULT_REVIEWS;} }
-function getBlocked(){ try{return JSON.parse(localStorage.getItem('bk_blocked')||'{}');}catch(e){return {};} }
-
-function renderStats(){
-  var reviews = getAllReviews();
-  var avgBintang = reviews.length ? (reviews.reduce(function(s,r){return s+r.bintang;},0)/reviews.length).toFixed(1) : '0';
-  var blocked = getBlocked();
-  var totalBlocked = Object.keys(blocked).reduce(function(s,k){return s+(blocked[k]||[]).length;},0);
-  var g = document.getElementById('stats-grid');
-  g.innerHTML = [
-    {num:reviews.length,label:'Total Ulasan'},
-    {num:'⭐ '+avgBintang,label:'Rating Rata-rata'},
-    {num:totalBlocked,label:'Tanggal Diblokir'},
-    {num:getStatus()==='available'?'🟢':'🔴',label:'Status Sekarang'},
-  ].map(function(s){
-    return '<div class="stat-card"><div class="stat-card-num">'+s.num+'</div><div class="stat-card-label">'+s.label+'</div></div>';
-  }).join('');
-
-  /* Popular layanan */
-  var count = {};
-  reviews.forEach(function(r){ var k=r.layanan.split('–')[0].trim(); count[k]=(count[k]||0)+1; });
-  var sorted = Object.keys(count).sort(function(a,b){return count[b]-count[a];}).slice(0,5);
-  var popHtml = sorted.length ? sorted.map(function(k,i){
-    return '<div class="list-item"><div class="list-item-left"><span class="list-item-main">'+(i+1)+'. '+k+'</span></div><span style="font-size:13px;font-weight:700;color:var(--orange);">'+count[k]+' ulasan</span></div>';
-  }).join('') : '<div class="empty">Belum ada data ulasan.</div>';
-  document.getElementById('popular-list').innerHTML = popHtml;
-
-  /* Recent reviews */
-  var recent = getAllReviews().slice().reverse().slice(0,3);
-  document.getElementById('recent-reviews').innerHTML = recent.map(function(r){
-    var stars=''; for(var i=1;i<=5;i++) stars+=i<=r.bintang?'★':'☆';
-    return '<div style="padding:10px 0;border-bottom:1px solid var(--border);">'+
-      '<div style="font-size:12px;color:var(--orange);">'+stars+'</div>'+
-      '<div style="font-size:13px;color:var(--text);margin:4px 0;font-style:italic;">"'+r.teks+'"</div>'+
-      '<div style="font-size:11px;color:var(--text-muted);">'+r.nama+' · '+r.layanan+'</div></div>';
-  }).join('');
+/* ====== NAV ====== */
+var currentPanel = 'statistik';
+function go(name){
+  currentPanel = name;
+  document.querySelectorAll('.nav-item').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('onclick').indexOf("'"+name+"'")!==-1);
+  });
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('p-'+name).classList.add('active');
+  renderPanel(name);
 }
+function renderPanel(name){
+  if(name==='statistik') renderStats();
+  else if(name==='status') renderStatus();
+  else if(name==='ulasan') renderAllReviews();
+  else if(name==='jadwal'){renderKatTabs();renderBlocked();}
+  else if(name==='faq') renderFaq();
+  else if(name==='pengumuman') renderAnn();
+  else if(name==='promo') renderPromo();
+  else if(name==='pengaturan') renderSettings();
+  else if(name==='backup') renderStorage();
+}
+function initAll(){renderStats();renderStatus();loadSettings();}
 
-/* STATUS */
-function getStatus(){ try{return localStorage.getItem('bk_status')||'available';}catch(e){return 'available';} }
+/* ====== STATUS ====== */
+function getStatus(){ return localStorage.getItem('bk_status')||'available'; }
 function setStatus(s){
   localStorage.setItem('bk_status',s);
-  renderStatus(); renderStats();
-  showToast(s==='available'?'Status: Tersedia ✓':'Status: Sedang Sibuk ✓');
+  var badge=document.getElementById('status-badge-top');
+  badge.textContent=s==='available'?'🟢 Tersedia':'🔴 Sedang Sibuk';
+  renderStatus();renderStats();
+  T(s==='available'?'Status: Tersedia ✓':'Status: Sedang Sibuk ✓');
 }
 function renderStatus(){
-  var s = getStatus();
-  document.getElementById('status-toggle').innerHTML = [
+  var s=getStatus();
+  document.getElementById('status-badge-top').textContent=s==='available'?'🟢 Tersedia':'🔴 Sedang Sibuk';
+  document.getElementById('so-wrap').innerHTML=[
     {key:'available',icon:'🟢',label:'Tersedia',desc:'Siap menerima pesanan baru'},
     {key:'busy',icon:'🔴',label:'Sedang Sibuk',desc:'Tidak bisa terima pesanan sementara'},
   ].map(function(o){
-    var cls='status-opt'+(s===o.key?' selected-'+o.key:'');
-    return '<div class="'+cls+'" onclick="setStatus(\''+o.key+'\')">'+
-      '<span class="status-opt-icon">'+o.icon+'</span>'+
-      '<div class="status-opt-label">'+o.label+'</div>'+
-      '<div class="status-opt-desc">'+o.desc+'</div></div>';
+    return '<div class="so'+(s===o.key?' sel-'+o.key:'')+'" onclick="setStatus(\''+o.key+'\')">'+
+      '<span class="so-icon">'+o.icon+'</span><div class="so-label">'+o.label+'</div><div class="so-desc">'+o.desc+'</div></div>';
+  }).join('');
+  var msgs=ls('bk_status_msg')||{};
+  document.getElementById('msg-available').value=msgs.available||'';
+  document.getElementById('msg-busy').value=msgs.busy||'';
+}
+function saveStatusMsg(){
+  ss('bk_status_msg',{available:document.getElementById('msg-available').value,busy:document.getElementById('msg-busy').value});
+  T('Pesan status disimpan ✓');
+}
+
+/* ====== STATS ====== */
+function getAllReviews(){
+  var saved=ls('bk_reviews')||[];
+  return DEFAULT_REVIEWS.concat(saved);
+}
+function renderStats(){
+  var reviews=getAllReviews();
+  var avg=reviews.length?(reviews.reduce(function(s,r){return s+r.bintang;},0)/reviews.length).toFixed(1):'0';
+  var blocked=ls('bk_blocked')||{};
+  var totalBlocked=Object.keys(blocked).reduce(function(s,k){return s+(blocked[k]||[]).length;},0);
+  var faqs=ls('bk_faqs')||[];
+  document.getElementById('sg').innerHTML=[
+    {num:reviews.length,label:'Total Ulasan'},
+    {num:'⭐ '+avg,label:'Rating Rata-rata'},
+    {num:totalBlocked,label:'Tanggal Diblokir'},
+    {num:faqs.length,label:'Total FAQ'},
+    {num:getStatus()==='available'?'🟢':'🔴',label:'Status'},
+    {num:(ls('bk_reviews')||[]).length,label:'Ulasan dari Pengunjung'},
+  ].map(function(s){return '<div class="sc"><div class="sc-num">'+s.num+'</div><div class="sc-label">'+s.label+'</div></div>';}).join('');
+
+  /* Rating chart */
+  var counts={1:0,2:0,3:0,4:0,5:0};
+  reviews.forEach(function(r){counts[r.bintang]=(counts[r.bintang]||0)+1;});
+  var maxC=Math.max.apply(null,Object.values(counts))||1;
+  document.getElementById('rating-chart').innerHTML=[5,4,3,2,1].map(function(n){
+    var pct=Math.round((counts[n]/maxC)*100);
+    return '<div class="chart-bar-wrap"><div class="chart-bar-label"><span>'+n+' ★</span><span>'+counts[n]+'</span></div>'+
+      '<div class="chart-bar-track"><div class="chart-bar-fill" style="width:'+pct+'%"></div></div></div>';
+  }).join('');
+
+  /* Popular */
+  var cnt={};
+  reviews.forEach(function(r){var k=r.layanan.split('–')[0].trim();cnt[k]=(cnt[k]||0)+1;});
+  var sorted=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a];}).slice(0,5);
+  document.getElementById('popular-list').innerHTML=sorted.length?sorted.map(function(k,i){
+    return '<div class="li-item"><div class="li-left"><span class="li-main">'+(i+1)+'. '+k+'</span></div><span style="font-size:13px;font-weight:700;color:var(--orange);">'+cnt[k]+' ulasan</span></div>';
+  }).join(''):'<div class="empty">Belum ada data.</div>';
+
+  /* Recent */
+  document.getElementById('recent-rv').innerHTML=getAllReviews().slice().reverse().slice(0,3).map(function(r){
+    return '<div style="padding:10px 0;border-bottom:1px solid var(--border);">'+
+      '<div style="font-size:12px;color:var(--orange);">'+starsHtml(r.bintang)+'</div>'+
+      '<div style="font-size:13px;color:var(--text);margin:4px 0;font-style:italic;">"'+r.teks.slice(0,80)+(r.teks.length>80?'...':'')+'"</div>'+
+      '<div style="font-size:11px;color:var(--muted);">'+r.nama+' · '+r.layanan+'</div></div>';
   }).join('');
 }
 
-/* JADWAL / BLOCKED */
+/* ====== ULASAN + BALAS ====== */
+function getReplies(){ return ls('bk_replies')||{}; }
+function renderAllReviews(){
+  var reviews=getAllReviews();
+  var replies=getReplies();
+  var wrap=document.getElementById('all-rv');
+  if(!reviews.length){wrap.innerHTML='<div class="empty">Belum ada ulasan.</div>';return;}
+  wrap.innerHTML=reviews.slice().reverse().map(function(r,revIdx){
+    var rk=replyKey(r);
+    var reply=replies[rk];
+    var savedList=ls('bk_reviews')||[];
+    var isSaved=!r.def;
+    var actualIdx=savedList.findIndex(function(x){return x.nama===r.nama&&x.teks===r.teks;});
+    return '<div class="rv-item" id="rv-'+rk.replace(/[^a-z0-9]/gi,'_')+'">'+ 
+      '<div class="rv-stars">'+starsHtml(r.bintang)+'</div>'+
+      '<div class="rv-text">"'+r.teks+'"</div>'+
+      '<div class="rv-meta">'+r.nama+' · '+r.layanan+(r.def?' · <em>Ulasan default</em>':'')+'</div>'+
+      (reply?
+        '<div class="rv-reply"><div class="rv-reply-label">Balasan BisaKok</div><div class="rv-reply-text" id="rt-'+rk.replace(/[^a-z0-9]/gi,'_')+'">'+reply+'</div>'+
+        '<div style="display:flex;gap:6px;margin-top:8px;">'+
+          '<button class="btn btn-gray" style="font-size:11px;padding:5px 10px;" onclick="editReply(\''+rk+'\')">Edit Balasan</button>'+
+          '<button class="btn btn-r" style="font-size:11px;padding:5px 10px;" onclick="deleteReply(\''+rk+'\')">Hapus Balasan</button>'+
+        '</div></div>'
+      :'')+
+      '<div class="rv-reply-form" id="form-'+rk.replace(/[^a-z0-9]/gi,'_')+'">'+
+        '<textarea placeholder="Tulis balasan untuk '+r.nama+'..." id="ta-'+rk.replace(/[^a-z0-9]/gi,'_')+'">'+( reply||'')+'</textarea>'+
+        '<div style="display:flex;flex-direction:column;gap:6px;">'+
+          '<button class="btn btn-o" style="font-size:12px;padding:7px 12px;white-space:nowrap;" onclick="saveReply(\''+rk+'\')">'+( reply?'Update':'Balas')+'</button>'+
+          (isSaved&&actualIdx>=0?'<button class="btn btn-r" style="font-size:12px;padding:7px 12px;" onclick="deleteReview('+actualIdx+')">Hapus</button>':'<span style="font-size:10px;color:var(--muted);padding:4px;text-align:center;">Default</span>')+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function saveReply(rk){
+  var id='ta-'+rk.replace(/[^a-z0-9]/gi,'_');
+  var ta=document.getElementById(id);
+  if(!ta||!ta.value.trim()){T('Tulis balasan dulu ya!');return;}
+  var replies=getReplies();
+  replies[rk]=ta.value.trim();
+  ss('bk_replies',replies);
+  renderAllReviews();renderStats();
+  T('Balasan disimpan ✓');
+}
+function editReply(rk){
+  var id='form-'+rk.replace(/[^a-z0-9]/gi,'_');
+  var form=document.getElementById(id);
+  if(form) form.style.display='flex';
+}
+function deleteReply(rk){
+  if(!confirm('Hapus balasan ini?')) return;
+  var replies=getReplies();
+  delete replies[rk];
+  ss('bk_replies',replies);
+  renderAllReviews();
+  T('Balasan dihapus.');
+}
+function deleteReview(idx){
+  if(!confirm('Hapus ulasan ini?')) return;
+  var saved=ls('bk_reviews')||[];
+  saved.splice(idx,1);
+  ss('bk_reviews',saved);
+  renderAllReviews();renderStats();
+  T('Ulasan dihapus.');
+}
+
+/* ====== PENGUMUMAN ====== */
+function getAnn(){ return ls('bk_ann')||{active:false,text:'',color:'#FF6B1A'}; }
+function saveAnn(){
+  var ann={active:document.getElementById('ann-active').checked,text:document.getElementById('ann-text').value,color:getAnn().color};
+  ss('bk_ann',ann);
+  document.getElementById('ann-preview').textContent=ann.text||'Preview pengumuman...';
+  document.getElementById('ann-preview').style.background=ann.color;
+}
+function setAnnColor(c){var ann=getAnn();ann.color=c;ss('bk_ann',ann);document.getElementById('ann-preview').style.background=c;T('Warna diubah.');}
+function renderAnn(){
+  var ann=getAnn();
+  document.getElementById('ann-active').checked=ann.active||false;
+  document.getElementById('ann-text').value=ann.text||'';
+  var prev=document.getElementById('ann-preview');
+  prev.textContent=ann.text||'Preview pengumuman...';
+  prev.style.background=ann.color||'#FF6B1A';
+}
+
+/* ====== PROMO BANNER ====== */
+function getPromo(){ return ls('bk_promo')||{active:false,text:'',sub:'',c1:'#FF6B1A',c2:'#ff8c00'}; }
+function savePromo(){
+  var p=getPromo();
+  p.active=document.getElementById('promo-active').checked;
+  p.text=document.getElementById('promo-text').value;
+  p.sub=document.getElementById('promo-sub').value;
+  ss('bk_promo',p);
+  var prev=document.getElementById('promo-preview');
+  prev.style.background='linear-gradient(135deg,'+p.c1+','+p.c2+')';
+  prev.innerHTML=(p.text||'Preview promo')+(p.sub?'<div style="font-size:11px;font-weight:400;margin-top:4px;opacity:0.85;">'+p.sub+'</div>':'');
+}
+function setPromoColor(c1,c2){var p=getPromo();p.c1=c1;p.c2=c2;ss('bk_promo',p);document.getElementById('promo-preview').style.background='linear-gradient(135deg,'+c1+','+c2+')';T('Warna diubah.');}
+function renderPromo(){
+  var p=getPromo();
+  document.getElementById('promo-active').checked=p.active||false;
+  document.getElementById('promo-text').value=p.text||'';
+  document.getElementById('promo-sub').value=p.sub||'';
+  var prev=document.getElementById('promo-preview');
+  prev.style.background='linear-gradient(135deg,'+(p.c1||'#FF6B1A')+','+(p.c2||'#ff8c00')+')';
+  prev.innerHTML=(p.text||'Preview promo')+(p.sub?'<div style="font-size:11px;font-weight:400;margin-top:4px;opacity:0.85;">'+p.sub+'</div>':'');
+}
+
+/* ====== FAQ ====== */
+function addFaq(){
+  var q=document.getElementById('faq-q').value.trim();
+  var a=document.getElementById('faq-a').value.trim();
+  if(!q||!a){T('Isi pertanyaan dan jawaban dulu ya!');return;}
+  var faqs=ls('bk_faqs')||[];
+  faqs.push({q:q,a:a});
+  ss('bk_faqs',faqs);
+  document.getElementById('faq-q').value='';
+  document.getElementById('faq-a').value='';
+  renderFaq();renderStats();
+  T('FAQ ditambahkan ✓');
+}
+function deleteFaq(i){
+  if(!confirm('Hapus FAQ ini?')) return;
+  var faqs=ls('bk_faqs')||[];
+  faqs.splice(i,1);
+  ss('bk_faqs',faqs);
+  renderFaq();renderStats();T('FAQ dihapus.');
+}
+function renderFaq(){
+  var faqs=ls('bk_faqs')||[];
+  var list=document.getElementById('faq-list');
+  if(!faqs.length){list.innerHTML='<div class="empty">Belum ada FAQ. Tambah di form di atas.</div>';return;}
+  list.innerHTML=faqs.map(function(f,i){
+    return '<div class="li-item"><div class="li-left">'+
+      '<span class="li-main">'+f.q+'</span>'+
+      '<span class="li-sub">'+f.a.slice(0,80)+(f.a.length>80?'...':'')+'</span></div>'+
+      '<div class="li-actions"><button class="btn btn-r" style="padding:5px 10px;font-size:12px;" onclick="deleteFaq('+i+')">Hapus</button></div></div>';
+  }).join('');
+}
+
+/* ====== JADWAL ====== */
+function getBlocked(){ return ls('bk_blocked')||{}; }
 function renderKatTabs(){
-  document.getElementById('kat-tabs').innerHTML = KATEGORI.map(function(k){
-    return '<button class="kat-tab'+(k===activeKat?' active':'')+'" onclick="setKat(\''+k.replace(/'/g,"\\'")+'\')">'+(ICONS[k]||'')+ ' '+k+'</button>';
+  document.getElementById('kt').innerHTML=KATEGORI.map(function(k){
+    return '<button class="kt-btn'+(k===activeKat?' active':'')+'" onclick="setKat(\''+k.replace(/'/g,"\\'")+'\')">'+(ICONS[k]||'')+' '+k+'</button>';
   }).join('');
-  document.getElementById('kat-active-label').textContent = activeKat;
+  document.getElementById('kat-label').textContent=activeKat;
 }
-function setKat(k){ activeKat=k; renderKatTabs(); renderBlocked(); }
-
-function formatTgl(d){
-  if(!d) return '';
-  var o=new Date(d+'T00:00:00');
-  var hr=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][o.getDay()];
-  return hr+', '+o.getDate()+'/'+(o.getMonth()+1)+'/'+o.getFullYear();
-}
-function saveBlocked(obj){ localStorage.setItem('bk_blocked',JSON.stringify(obj)); }
-
+function setKat(k){activeKat=k;renderKatTabs();renderBlocked();}
 function addBlock(){
   var d=document.getElementById('new-date').value;
-  if(!d){showToast('Pilih tanggal dulu!');return;}
+  if(!d){T('Pilih tanggal dulu!');return;}
   var obj=getBlocked();
   if(!obj[activeKat]) obj[activeKat]=[];
-  if(obj[activeKat].indexOf(d)===-1){ obj[activeKat].push(d); obj[activeKat].sort(); saveBlocked(obj); showToast('Tanggal diblokir untuk '+activeKat); }
-  else showToast('Tanggal ini sudah diblokir.');
+  if(obj[activeKat].indexOf(d)===-1){obj[activeKat].push(d);obj[activeKat].sort();ss('bk_blocked',obj);T('Tanggal diblokir untuk '+activeKat+' ✓');}
+  else T('Tanggal ini sudah diblokir.');
   document.getElementById('new-date').value='';
-  renderBlocked(); renderStats();
+  renderBlocked();renderStats();
 }
 function unblock(kat,d){
   var obj=getBlocked();
-  if(obj[kat]){ obj[kat]=obj[kat].filter(function(x){return x!==d;}); if(!obj[kat].length) delete obj[kat]; }
-  saveBlocked(obj); showToast('Tanggal dibuka kembali.'); renderBlocked(); renderStats();
+  if(obj[kat]){obj[kat]=obj[kat].filter(function(x){return x!==d;});if(!obj[kat].length)delete obj[kat];}
+  ss('bk_blocked',obj);T('Tanggal dibuka kembali.');renderBlocked();renderStats();
 }
 function renderBlocked(){
-  var obj=getBlocked(); var items=[];
+  var obj=getBlocked();var items=[];
   if(activeKat==='Semua Layanan'){
-    Object.keys(obj).forEach(function(k){ (obj[k]||[]).forEach(function(d){ items.push({kat:k,date:d}); }); });
+    Object.keys(obj).forEach(function(k){(obj[k]||[]).forEach(function(d){items.push({kat:k,date:d});});});
     items.sort(function(a,b){return a.date.localeCompare(b.date);});
   } else {
-    (obj[activeKat]||[]).forEach(function(d){ items.push({kat:activeKat,date:d}); });
+    (obj[activeKat]||[]).forEach(function(d){items.push({kat:activeKat,date:d});});
   }
   var list=document.getElementById('blocked-list');
-  if(!items.length){ list.innerHTML='<div class="empty">Belum ada tanggal yang diblokir'+(activeKat==='Semua Layanan'?'':' untuk '+activeKat)+'.</div>'; return; }
+  if(!items.length){list.innerHTML='<div class="empty">Belum ada tanggal diblokir'+(activeKat==='Semua Layanan'?'':' untuk '+activeKat)+'.</div>';return;}
   list.innerHTML=items.map(function(item){
-    return '<div class="list-item">'+
-      '<div class="list-item-left"><span class="list-item-main">'+formatTgl(item.date)+'</span><span class="list-item-sub">'+item.kat+'</span></div>'+
-      '<button class="btn-red" onclick="unblock(\''+item.kat.replace(/'/g,"\\'")+'\',\''+item.date+'\')">Buka Kembali</button></div>';
+    return '<div class="li-item"><div class="li-left"><span class="li-main">'+formatTgl(item.date)+'</span><span class="li-sub">'+item.kat+'</span></div>'+
+      '<button class="btn btn-r" style="padding:5px 12px;font-size:12px;" onclick="unblock(\''+item.kat.replace(/'/g,"\\'")+'\',\''+item.date+'\')">Buka Kembali</button></div>';
   }).join('');
 }
 
-/* REVIEWS */
-function deleteReview(idx){
-  if(!confirm('Hapus ulasan ini?')) return;
-  var saved=[]; try{saved=JSON.parse(localStorage.getItem('bk_reviews')||'[]');}catch(e){}
-  saved.splice(idx,1);
-  localStorage.setItem('bk_reviews',JSON.stringify(saved));
-  renderAdminReviews(); renderStats();
-  showToast('Ulasan dihapus.');
+/* ====== PENGATURAN ====== */
+function loadSettings(){
+  var s=ls('bk_settings')||{};
+  document.getElementById('set-wa').value=s.wa||'6285143863741';
+  document.getElementById('set-dana').value=s.dana||'08384370101';
+  document.getElementById('set-brand').value=s.brand||'BisaKok';
+  var feats=ls('bk_feats')||{review:true,faq:false,maintenance:false};
+  document.getElementById('feat-review').checked=feats.review!==false;
+  document.getElementById('feat-faq').checked=!!feats.faq;
+  document.getElementById('feat-maintenance').checked=!!feats.maintenance;
 }
-function renderAdminReviews(){
-  var saved=[]; try{saved=JSON.parse(localStorage.getItem('bk_reviews')||'[]');}catch(e){}
-  var all=DEFAULT_REVIEWS.map(function(r){return {r:r,deletable:false};})
-    .concat(saved.map(function(r,i){return {r:r,deletable:true,idx:i};}));
-  var wrap=document.getElementById('all-reviews');
-  if(!all.length){wrap.innerHTML='<div class="empty">Belum ada ulasan.</div>';return;}
-  wrap.innerHTML=all.slice().reverse().map(function(item){
-    var r=item.r;
-    var stars=''; for(var i=1;i<=5;i++) stars+=i<=r.bintang?'★':'☆';
-    return '<div class="review-item">'+
-      '<div class="review-item-stars">'+stars+'</div>'+
-      '<div class="review-item-text">"'+r.teks+'"</div>'+
-      '<div class="review-item-meta">'+r.nama+' · '+r.layanan+'</div>'+
-      (item.deletable?'<div class="review-item-actions"><button class="btn-del" onclick="deleteReview('+item.idx+')">Hapus</button></div>':
-        '<div style="margin-top:6px;"><span style="font-size:10px;color:var(--text-muted);background:var(--gray2);padding:2px 8px;border-radius:99px;">Default</span></div>')+
+function renderSettings(){ loadSettings(); }
+function saveSettings(){
+  ss('bk_settings',{wa:document.getElementById('set-wa').value,dana:document.getElementById('set-dana').value,brand:document.getElementById('set-brand').value});
+  T('Pengaturan disimpan ✓');
+}
+function saveFeat(){
+  ss('bk_feats',{review:document.getElementById('feat-review').checked,faq:document.getElementById('feat-faq').checked,maintenance:document.getElementById('feat-maintenance').checked});
+  T('Pengaturan fitur disimpan ✓');
+}
+function changePass(){
+  var np=document.getElementById('new-pass').value;
+  var cp=document.getElementById('confirm-pass').value;
+  if(!np){T('Isi password baru dulu!');return;}
+  if(np!==cp){T('Password tidak cocok!');return;}
+  if(np.length<6){T('Password minimal 6 karakter!');return;}
+  localStorage.setItem(PASS_KEY,np);
+  document.getElementById('new-pass').value='';
+  document.getElementById('confirm-pass').value='';
+  T('Password berhasil diubah ✓');
+}
+
+/* ====== BACKUP ====== */
+function renderStorage(){
+  var keys=['bk_reviews','bk_replies','bk_blocked','bk_faqs','bk_ann','bk_promo','bk_settings','bk_feats','bk_status','bk_status_msg'];
+  var html=keys.map(function(k){
+    var val=localStorage.getItem(k);
+    var size=val?new Blob([val]).size:0;
+    return '<div class="li-item"><div class="li-left"><span class="li-main">'+k+'</span><span class="li-sub">'+(val?Math.round(size)+' bytes':'Kosong')+'</span></div>'+
+      (val?'<span style="font-size:11px;background:var(--gp);color:var(--green);padding:3px 8px;border-radius:8px;font-weight:700;">Ada</span>':'<span style="font-size:11px;color:var(--muted);">-</span>')+
     '</div>';
   }).join('');
+  document.getElementById('storage-info').innerHTML=html;
+}
+function exportData(){
+  var keys=['bk_reviews','bk_replies','bk_blocked','bk_faqs','bk_ann','bk_promo','bk_settings','bk_feats','bk_status','bk_status_msg'];
+  var data={exported:new Date().toISOString()};
+  keys.forEach(function(k){data[k]=ls(k);});
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='bisakok-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+  T('Backup didownload ✓');
+}
+function importData(){
+  var file=document.getElementById('import-file').files[0];
+  if(!file){T('Pilih file JSON dulu!');return;}
+  if(!confirm('Data yang ada akan ditimpa. Lanjutkan?')) return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      var keys=['bk_reviews','bk_replies','bk_blocked','bk_faqs','bk_ann','bk_promo','bk_settings','bk_feats','bk_status','bk_status_msg'];
+      keys.forEach(function(k){if(data[k]!==undefined) ss(k,data[k]);});
+      T('Data berhasil di-restore ✓');
+      renderStats();renderStorage();loadSettings();
+    }catch(err){T('File tidak valid!');}
+  };
+  reader.readAsText(file);
+}
+function resetData(){
+  if(!confirm('YAKIN? Semua data akan dihapus permanen!')) return;
+  if(!confirm('Ini tidak bisa dibatalkan. Lanjutkan?')) return;
+  ['bk_reviews','bk_replies','bk_blocked','bk_faqs','bk_ann','bk_promo','bk_settings','bk_feats','bk_status','bk_status_msg'].forEach(function(k){localStorage.removeItem(k);});
+  T('Semua data direset.');renderStats();renderStorage();
 }
 </script>
 </body>
