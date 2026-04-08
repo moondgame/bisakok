@@ -225,6 +225,9 @@ footer{background:#1C0A00;padding:2rem 1.5rem;text-align:center;width:100%;}
 
 <div id="toast"></div>
 
+<!-- PENGUMUMAN BANNER -->
+<div id="ann-bar" style="display:none;padding:10px 1.5rem;text-align:center;font-size:13px;font-weight:700;color:#fff;"></div>
+
 <!-- NAV -->
 <nav>
   <a class="logo" href="#">Bisa<span>Kok</span></a>
@@ -253,6 +256,8 @@ footer{background:#1C0A00;padding:2rem 1.5rem;text-align:center;width:100%;}
     <span class="htag">✅ Terpercaya</span><span class="htag">⚡ Respon Cepat</span>
     <span class="htag">🤝 Harga Nego</span><span class="htag">📍 Siap ke Mana Aja</span><span class="htag">😊 No Drama</span>
   </div>
+  <!-- PROMO BANNER -->
+  <div id="promo-bar" style="display:none;margin-top:1.5rem;border-radius:14px;padding:12px 18px;color:#fff;font-weight:700;font-size:14px;max-width:500px;margin-left:auto;margin-right:auto;"></div>
 </div>
 
 <!-- STATS -->
@@ -361,6 +366,13 @@ footer{background:#1C0A00;padding:2rem 1.5rem;text-align:center;width:100%;}
     <span class="wa-icon">✓</span> Kirim Bukti Pembayaran ke WA
   </a>
   <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;line-height:1.6;max-width:380px;margin-left:auto;margin-right:auto;">Kirim bukti transfer beserta nama & layanan yang dipesan. Pesanan dikonfirmasi setelah pembayaran terverifikasi.</p>
+</section>
+
+<!-- FAQ -->
+<section id="faq-section" style="background:var(--section-alt);display:none;">
+  <p class="sec-label reveal">FAQ</p>
+  <h2 class="sec-title reveal">Pertanyaan Umum</h2>
+  <div id="faq-list" style="max-width:600px;margin:0 auto;"></div>
 </section>
 
 <!-- CTA -->
@@ -570,16 +582,26 @@ var DEFAULT_REVIEWS = [
   {nama:'Maya P.',layanan:'Teman Makan',bintang:5,teks:'Orangnya ramah dan nyambung diajak ngobrol. Makan jadi lebih seru. Pasti bakal pesen lagi!'},
 ];
 function getReviews(){ try{ return DEFAULT_REVIEWS.concat(JSON.parse(localStorage.getItem('bk_reviews')||'[]')); }catch(e){ return DEFAULT_REVIEWS; } }
+function getReplies(){ try{ return JSON.parse(localStorage.getItem('bk_replies')||'{}'); }catch(e){ return {}; } }
 function renderReviews(){
   var reviews=getReviews().slice().reverse().slice(0,9);
-  var html=reviews.map(function(r){
-    var stars=''; for(var i=1;i<=5;i++) stars+=i<=r.bintang?'★':'☆';
+  var replies=getReplies();
+  var html=reviews.map(function(r,i){
+    var stars=''; for(var j=1;j<=5;j++) stars+=j<=r.bintang?'★':'☆';
     var initials=r.nama.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+    var key=r.nama+'_'+i;
+    var replyHtml='';
+    if(replies[r.nama+'|'+r.teks.slice(0,20)]){
+      replyHtml='<div style="margin-top:10px;padding:10px 12px;background:var(--orange-pale);border-radius:10px;border-left:3px solid var(--orange);">'+
+        '<div style="font-size:10px;font-weight:700;color:var(--orange);margin-bottom:4px;">Balasan BisaKok</div>'+
+        '<div style="font-size:12px;color:var(--text);line-height:1.5;">'+replies[r.nama+'|'+r.teks.slice(0,20)]+'</div></div>';
+    }
     return '<div class="review-card">'+
       '<div class="review-stars">'+stars+'</div>'+
       '<div class="review-text">"'+r.teks+'"</div>'+
       '<div class="review-meta"><div class="review-avatar">'+initials+'</div>'+
-      '<div><div class="review-name">'+r.nama+'</div><div class="review-role">'+r.layanan+'</div></div></div></div>';
+      '<div><div class="review-name">'+r.nama+'</div><div class="review-role">'+r.layanan+'</div></div></div>'+
+      replyHtml+'</div>';
   }).join('');
   document.getElementById('reviews-grid').innerHTML=html;
 }
@@ -629,6 +651,53 @@ function showToast(msg){
   var t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},2400);
+}
+
+/* === PENGUMUMAN, PROMO, FAQ dari ADMIN === */
+(function(){
+  function ls(k){ try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;} }
+
+  /* Pengumuman */
+  var ann=ls('bk_ann');
+  if(ann&&ann.active&&ann.text){
+    var bar=document.getElementById('ann-bar');
+    bar.style.display='block';
+    bar.style.background=ann.color||'#FF6B1A';
+    bar.textContent=ann.text;
+  }
+
+  /* Promo banner */
+  var promo=ls('bk_promo');
+  if(promo&&promo.active&&promo.text){
+    var pb=document.getElementById('promo-bar');
+    pb.style.display='block';
+    pb.style.background='linear-gradient(135deg,'+(promo.c1||'#FF6B1A')+','+(promo.c2||'#ff8c00')+')';
+    pb.innerHTML=promo.text+(promo.sub?'<div style="font-size:11px;font-weight:400;margin-top:4px;opacity:0.85;">'+promo.sub+'</div>':'');
+  }
+
+  /* FAQ */
+  var faqs=ls('bk_faqs');
+  var feats=ls('bk_feats')||{};
+  if(faqs&&faqs.length&&feats.faq){
+    document.getElementById('faq-section').style.display='block';
+    var openIdx=-1;
+    document.getElementById('faq-list').innerHTML=faqs.map(function(f,i){
+      return '<div style="background:var(--card-bg);border-radius:14px;border:1px solid var(--border);margin-bottom:8px;overflow:hidden;">'+
+        '<button onclick="toggleFaq('+i+')" id="faq-btn-'+i+'" style="width:100%;text-align:left;padding:14px 16px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);font-family:inherit;display:flex;justify-content:space-between;align-items:center;">'+
+        f.q+'<span id="faq-arrow-'+i+'">›</span></button>'+
+        '<div id="faq-ans-'+i+'" style="display:none;padding:0 16px 14px;font-size:13px;color:var(--text-muted);line-height:1.7;">'+f.a+'</div>'+
+      '</div>';
+    }).join('');
+  }
+})();
+
+function toggleFaq(i){
+  var ans=document.getElementById('faq-ans-'+i);
+  var arr=document.getElementById('faq-arrow-'+i);
+  var open=ans.style.display==='block';
+  document.querySelectorAll('[id^="faq-ans-"]').forEach(function(el){el.style.display='none';});
+  document.querySelectorAll('[id^="faq-arrow-"]').forEach(function(el){el.textContent='›';});
+  if(!open){ans.style.display='block';arr.textContent='⌄';}
 }
 
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
